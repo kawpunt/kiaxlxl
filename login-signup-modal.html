@@ -1,0 +1,21 @@
+<!-- Login/Signup Modal HTML Example -->
+<div id="auth-modal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:8px; padding:32px; width:320px; max-width:90vw; box-shadow:0 4px 24px rgba(0,0,0,0.2);">
+    <button onclick="document.getElementById('auth-modal').style.display='none'" style="float:right; background:none; border:none; font-size:1.5em;">&times;</button>
+    <h2 id="auth-title">Login</h2>
+    <form id="auth-form">
+      <input id="auth-email" type="email" placeholder="Email" required style="width:100%;margin-bottom:12px;padding:8px;">
+      <input id="auth-password" type="password" placeholder="Password" required style="width:100%;margin-bottom:12px;padding:8px;">
+      <div id="auth-confirm-group" style="display:none;">
+        <input id="auth-confirm" type="password" placeholder="Confirm Password" style="width:100%;margin-bottom:12px;padding:8px;">
+      </div>
+      <button type="submit" id="auth-submit" style="width:100%;background:#1976d2;color:#fff;padding:10px;border:none;border-radius:4px;font-size:1em;">Login</button>
+    </form>
+    <div style="margin-top: 14px; text-align:center;">
+      <span id="auth-switch-text">Don't have an account?</span>
+      <a href="#" id="auth-switch-link">Sign up</a>
+    </div>
+    <div id="auth-message" style="color:red; margin-top:10px;"></div>
+  </div>
+</div>
+<!-- End Modal HTML -->

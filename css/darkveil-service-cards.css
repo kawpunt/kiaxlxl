@@ -1,0 +1,66 @@
+/* DarkVeil Service Card Styles */
+
+/* Ensure service card content appears above DarkVeil background */
+.service-card-modern {
+    z-index: 1;
+}
+
+.service-card-modern .darkveil-container {
+    z-index: 0;
+    border-radius: 24px;
+}
+
+/* Adjust text colors to ensure visibility over DarkVeil */
+.service-card-modern h3,
+.service-card-modern p,
+.service-card-modern .metric-number,
+.service-card-modern .metric-label {
+    position: relative;
+    z-index: 2;
+}
+
+.service-card-modern .service-icon-modern,
+.service-card-modern .service-features-modern li,
+.service-card-modern .service-cta {
+    position: relative;
+    z-index: 2;
+}
+
+/* Featured card adjustments */
+.service-card-modern.featured {
+    border: 2px solid #f59e0b;
+    /* Remove the light background gradient since DarkVeil will provide the background */
+    background: transparent !important;
+}
+
+/* Ensure the featured badge is visible */
+.service-card-modern .featured-badge {
+    position: relative;
+    z-index: 3;
+}
+
+/* Adjust service metrics to be visible over DarkVeil */
+.service-card-modern .service-metrics {
+    position: relative;
+    z-index: 2;
+}
+
+/* Adjust service features to be visible over DarkVeil */
+.service-card-modern .service-features-modern {
+    position: relative;
+    z-index: 2;
+}
+
+/* Adjust service CTA button to be visible over DarkVeil */
+.service-card-modern .service-cta {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 215, 0, 0.9) !important;
+    color: #000 !important;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
+}
+
+.service-card-modern .service-cta:hover {
+    background: rgba(184, 134, 11, 0.9) !important;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4) !important;
+}

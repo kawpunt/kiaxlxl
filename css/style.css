@@ -1,0 +1,6 @@
+/* ... existing code ... */
+#cart-icon {
+    /* 确保这里没有 pointer-events: none; */
+    /* 其他样式 */
+}
+/* ... existing code ... */

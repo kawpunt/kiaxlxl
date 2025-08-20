@@ -1,0 +1,98 @@
+/* Dark Theme Overrides - Non-intrusive (no behavior changes) */
+
+/* Global */
+html, body {
+  background: #000 !important;
+  color: #e5e7eb;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(0,0,0,0.92) !important;
+  border-bottom: 1px solid #1f2937 !important;
+}
+.nav-menu a { color: #e5e7eb !important; }
+.nav-menu a:hover { color: #FFD700 !important; background: rgba(255,215,0,0.12) !important; }
+.nav-toggle span { background: #e5e7eb !important; }
+
+/* Sections */
+section, header, footer, main, .container,
+.stats, .services, .featured-reviews, .products, .about, .contact {
+  background: #000 !important;
+}
+
+/* Cards and panels */
+.review-card, .product-card, .service-card-modern, .visual-element, .about-card, .result-stat {
+  background: #0b0b0b !important;
+  border: 1px solid #2a2a2a !important;
+  color: #e5e7eb !important;
+  box-shadow: none !important;
+}
+
+/* Headings and text inside cards */
+.review-content h3, .product-info h4, .service-card-modern h3, .about-card h4 {
+  color: #f3f4f6 !important;
+}
+.review-content p, .product-info, .service-card-modern p, .about-card p, .review-rating span {
+  color: #cbd5e1 !important;
+}
+
+/* Grids/blocks that were light */
+.service-showcase, .products, .stats, .featured-reviews {
+  background: #000 !important;
+  box-shadow: none !important;
+}
+.service-showcase .result-stat { background: #0b0b0b !important; }
+
+/* Contact/forms */
+.form-group input, .form-group textarea, .chip, .field {
+  background: #0b0b0b !important;
+  color: #e5e7eb !important;
+  border: 1px solid #333 !important;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: #9ca3af !important; }
+.form-group input:focus, .form-group textarea:focus { border-color: #FFD700 !important; }
+
+/* Product items */
+.product-image { background: #0b0b0b !important; }
+.product-rating span { color: #cbd5e1 !important; }
+.original-price { color: #9ca3af !important; }
+
+/* Stats text */
+.stat-item p, .section-header p { color: #cbd5e1 !important; }
+.section-header h2, .about-text h2 { color: #f3f4f6 !important; }
+
+/* Footer */
+.footer { background: #000 !important; }
+.footer-section p, .footer-section ul li a, .footer-bottom { color: #9ca3af !important; }
+.footer-section ul li a:hover { color: #fff !important; }
+.social-links a { background: #111 !important; color: #e5e7eb !important; }
+.social-links a:hover { background: #FFD700 !important; color: #000 !important; }
+
+/* Buttons keep gold theme */
+.btn-primary, .btn-small, .btn-cart, .service-cta, .btn-gradient { color: #000 !important; }
+.btn-secondary { border-color: #e5e7eb !important; color: #e5e7eb !important; }
+.btn-secondary:hover { background: #e5e7eb !important; color: #000 !important; }
+
+/* Tables/badges/labels */
+.review-badge { background: #FFD700 !important; color: #000 !important; }
+.category-btn { background: #0b0b0b !important; border-color: #333 !important; color: #e5e7eb !important; }
+.category-btn:hover { background: #FFD700 !important; color: #000 !important; }
+
+/* Scrollbar dark */
+::-webkit-scrollbar-track { background: #111 !important; }
+::-webkit-scrollbar-thumb { background: #333 !important; }
+::-webkit-scrollbar-thumb:hover { background: #444 !important; }
+
+/* Keep hero gradient but it is already dark - ensure text contrast */
+.hero-content p { color: #e5e7eb !important; }
+
+/* Pricing modal dark */
+.pricing-modal-overlay { background: rgba(0,0,0,0.65) !important; }
+.pricing-modal { background: #0f0f0f !important; color: #e5e7eb !important; border-color: #2a2a2a !important; }
+.field { background: #0b0b0b !important; border-color: #262626 !important; }
+.help { color: #9ca3af !important; }
+.chip { border-color: #333 !important; }
+.value-badge { background: #111 !important; border-color: #333 !important; color: #FFD700 !important; }
+
+/* Auth modal content remains glassy; no behavior change */

@@ -1,0 +1,156 @@
+/* Booking Modal Styles */
+.pricing-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pricing-modal {
+  background: #0f0f0f;
+  color: #e5e7eb;
+  border: 1px solid #2a2a2a;
+  border-radius: 18px;
+  padding: 1.2rem 1.2rem 1rem;
+  width: min(720px, 96vw);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+}
+
+.pricing-modal h3 {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0 0 .75rem;
+  color: #FFD700;
+  font-size: 1.5rem;
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .booking-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  background: #0b0b0b;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: .75rem;
+}
+
+.field label {
+  font-size: .9rem;
+  color: #cbd5e1;
+}
+
+.field input, .field textarea {
+  background: #111;
+  border: 1px solid #333;
+  color: #e5e7eb;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.field input:focus, .field textarea:focus {
+  border-color: #FFD700;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.pricing-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+  margin-top: 1rem;
+}
+
+.btn-small-sec {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #e5e7eb;
+  border-radius: 10px;
+  padding: .65rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-small-sec:hover {
+  background: #222;
+  border-color: #444;
+}
+
+.btn-small-pri {
+  background: linear-gradient(135deg, #FFD700, #B8860B);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: .65rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.btn-small-pri:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3);
+}
+
+.btn-small-pri:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+}
+
+/* Success Toast */
+.success-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+  z-index: 1300;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.success-toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.success-toast i {
+  font-size: 24px;
+  color: white;
+}
+
+.success-toast span {
+  font-weight: 500;
+}

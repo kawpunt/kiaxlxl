@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <!-- Font Awesome CDN for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JYS-MEDIA - Digital Marketing Experts</title>
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/DarkVeil.css">
+    <link rel="stylesheet" href="css/dark-overrides.css">
+    <link rel="stylesheet" href="css/darkveil-service-cards.css">
+    <link rel="stylesheet" href="css/chat-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-tilt-amplitude="0">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.svg" alt="JYS-MEDIA" class="logo-img">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="openMyBookings(); return false;">My Bookings</a></li>
+                <li><button onclick="testAdminNotification()" style="background:#FFD700;color:#000;border:none;padding:8px 12px;border-radius:6px;font-weight:600;cursor:pointer;font-size:12px;">Test Toast</button></li>
+                <li id="nav-user" style="display:none; align-items:center; position:relative;">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span id="nav-user-initials" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#FFD700;color:#000;font-weight:700;font-size:1.15em;cursor:pointer;">U</span>
+                        <span id="nav-user-name" style="color:#FFD700;font-weight:600;font-size:0.9em;cursor:pointer;">User</span>
+                        <i id="user-settings-icon" class="fas fa-cog" style="color:#FFD700;font-size:1.2em;cursor:pointer;margin-left:8px;"></i>
+                    </div>
+                    <!-- Settings Dropdown -->
+                    <div id="user-settings-dropdown" style="position:absolute;top:100%;right:0;background:white;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);padding:8px 0;min-width:200px;z-index:1001;display:none;animation:slideIn 0.3s ease;margin-top:8px;">
+                        <div class="dropdown-item" id="change-password-btn" style="padding:10px 16px;color:#333;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.2s;">
+                            <i class="fas fa-key" style="width:20px;text-align:center;"></i>
+                            <span>Change Password</span>
+                        </div>
+                        <div class="dropdown-divider" style="height:1px;background-color:rgba(0,0,0,0.1);margin:4px 0;"></div>
+                        <div class="dropdown-item" id="logout-btn" style="padding:10px 16px;color:#e74c3c;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.2s;">
+                            <i class="fas fa-sign-out-alt" style="width:20px;text-align:center;"></i>
+                            <span>Logout</span>
+                        </div>
+                    </div>
+                </li>
+                <li id="nav-login-btn-li"><button id="login-btn" class="btn-modern btn-gradient" style="margin-left:16px;"><i class="fas fa-sign-in-alt"></i> Login</button></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <!-- Main Logo Display -->
+                <div class="hero-logo" style="text-align: center; margin-bottom: 30px;">
+                    
+                </div>
+
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Digital Marketing Experts</span>
+                </div>
+                <h1>Grow Your Business with <span class="gradient-text">Proven Digital Strategies</span></h1>
+                <p>We deliver results-driven digital marketing solutions including Meta Ads, SEO optimization, and sales funnels that convert visitors into customers.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Successful Campaigns</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">300%</span>
+                        <span class="stat-label">Average ROI Increase</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">48hrs</span>
+                        <span class="stat-label">Avg Setup Time</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn-modern btn-gradient"><i class="fas fa-rocket"></i> Get Started Today</a>
+                    <a href="#contact" class="btn-modern btn-outline"><i class="fas fa-phone"></i> Free Consultation</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-visual">
+                    <div class="floating-card card-1">
+                        <i class="fab fa-facebook"></i>
+                        <span>Meta Ads</span>
+                        <div class="card-metric">+250% ROI</div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-search"></i>
+                        <span>SEO Growth</span>
+                        <div class="card-metric">Top 3 Rankings</div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-handshake"></i>
+                        <span>Sales Consulting</span>
+                        <div class="card-metric">Close More Deals</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10K+</h3>
+                    <p>Products Reviewed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99%</h3>
+                    <p>Accuracy Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Reviews Section -->
+    
+
+    
+ 
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Our Services</span>
+                </div>
+                <h2>Transform Your Business with <span class="highlight-text">Proven Digital Solutions</span></h2>
+                <p>We deliver measurable results through data-driven strategies that convert visitors into customers and grow your revenue</p>
+            </div>
+            
+            <div class="services-grid-modern">
+                <div class="service-card-modern">
+                    <div class="service-icon-modern">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h3>Meta Ads Management</h3>
+                    <p>Strategic Facebook & Instagram advertising with proven ROI optimization</p>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <span class="metric-number">250%</span>
+                            <span class="metric-label">Avg ROI Increase</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-number">48hrs</span>
+                            <span class="metric-label">Setup Time</span>
+                        </div>
+                    </div>
+                    <ul class="service-features-modern">
+                        <li><i class="fas fa-check-circle"></i> Advanced audience targeting</li>
+                        <li><i class="fas fa-check-circle"></i> A/B testing & optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Real-time analytics</li>
+                    </ul>
+                    <button class="service-cta" onclick="openBooking('meta-ads')">Book Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="service-card-modern">
+                    <div class="service-icon-modern">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Optimization</h3>
+                    <p>Dominate search results with our comprehensive SEO strategies</p>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <span class="metric-number">Top 3</span>
+                            <span class="metric-label">Rankings</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-number">90 days</span>
+                            <span class="metric-label">Results</span>
+                        </div>
+                    </div>
+                    <ul class="service-features-modern">
+                        <li><i class="fas fa-check-circle"></i> Keyword research & strategy</li>
+                        <li><i class="fas fa-check-circle"></i> Technical SEO optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Content optimization</li>
+                    </ul>
+                    <button class="service-cta" onclick="openBooking('seo')">Book Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="service-card-modern" data-tilt-amplitude="14">
+                    <div class="service-icon-modern">
+                        <i class="fas fa-funnel-dollar"></i>
+                    </div>
+                    <h3>Sales Funnel Optimization</h3>
+                    <p>Convert more visitors with tested funnel strategies</p>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <span class="metric-number">300%</span>
+                            <span class="metric-label">Conversion Boost</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-number">14 days</span>
+                            <span class="metric-label">Implementation</span>
+                        </div>
+                    </div>
+                    <ul class="service-features-modern">
+                        <li><i class="fas fa-check-circle"></i> Conversion optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Customer journey mapping</li>
+                        <li><i class="fas fa-check-circle"></i> Performance tracking</li>
+                    </ul>
+                    <button class="service-cta" onclick="openBooking('funnels')">Book Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="service-card-modern">
+                    <div class="service-icon-modern">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Sales Consulting</h3>
+                    <p>Expert guidance to close more deals and increase revenue</p>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <span class="metric-number">40%</span>
+                            <span class="metric-label">Close Rate Boost</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-number">1-on-1</span>
+                            <span class="metric-label">Coaching</span>
+                        </div>
+                    </div>
+                    <ul class="service-features-modern">
+                        <li><i class="fas fa-check-circle"></i> Sales process optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Lead qualification training</li>
+                        <li><i class="fas fa-check-circle"></i> Negotiation strategies</li>
+                    </ul>
+                    <button class="service-cta" onclick="openBooking('consulting')">Book Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="service-card-modern featured" data-tilt-amplitude="14">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="service-icon-modern">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Sales Consulting & Deal Closing</h3>
+                    <p>Expert consulting to optimize your sales process and close more deals</p>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <span class="metric-number">40%</span>
+                            <span class="metric-label">Close Rate Boost</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-number">1-on-1</span>
+                            <span class="metric-label">Coaching</span>
+                        </div>
+                    </div>
+                    <ul class="service-features-modern">
+                        <li><i class="fas fa-check-circle"></i> Sales process optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Objection handling & negotiation</li>
+                        <li><i class="fas fa-check-circle"></i> Closing frameworks and scripts</li>
+                    </ul>
+                    <button class="service-cta featured-cta" onclick="openBooking('consulting-plus')">Get Started <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About JYSmedia</h2>
+                    <p>We're a cutting-edge technology review platform that bridges the gap between innovation and consumer needs. Our team of expert reviewers and tech enthusiasts work tirelessly to provide you with honest, comprehensive, and actionable product insights.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-microscope"></i>
+                            <div>
+                                <h4>In-Depth Analysis</h4>
+                                <p>Every product undergoes rigorous testing and evaluation</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Unbiased Reviews</h4>
+                                <p>Independent testing ensures honest recommendations</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <h4>Latest Technology</h4>
+                                <p>First to review cutting-edge innovations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-users"></i>
+                        <p>Our Expert Team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Have questions or want to collaborate? We'd love to hear from you.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+    <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <div>
+            <h4>Email</h4>
+            <p>jysmedia@outlook.com</p>
+        </div>
+    </div>
+    <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <div>
+            <h4>Phone</h4>
+            <p>+61 0415215370</p>
+        </div>
+    </div>
+    <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+            <h4>Address</h4>
+            <p>26 Greendcle Tec,Quakers Hill, NSW 2763, Australia</p>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jys<span class="highlight">_media</span></h3>
+                    <p>The future of product reviews and tech innovation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+            <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Meta Ads Management</a></li>
+                        <li><a href="#services">SEO Optimization</a></li>
+                        <li><a href="#services">Sales Funnels</a></li>
+                        <li><a href="#services">Sales Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+    <li><a href="#">Help Center</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Terms of Service</a></li>
+</ul>
+                </div>
+                        </div>
+            <div class="footer-social">
+    <a href="https://facebook.com/yourusername" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.instagram.com/jys_media?igsh=NjZnOHNiNnB5NnBh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://youtube.com/yourusername" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
+<div class="footer-bottom">
+    <p>&copy; 2024 Jys_media. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Signup Modal HTML -->
+    <div id="auth-modal" class="modal-glass" style="display:none;">
+      <div class="auth-modal-content">
+        <button class="auth-close-btn" onclick="document.getElementById('auth-modal').style.display='none'">&times;</button>
+        <h2 id="auth-title" class="auth-title">Login</h2>
+        <form id="auth-form">
+          <input id="auth-email" type="email" placeholder="Email" required class="auth-input">
+          <input id="auth-password" type="password" placeholder="Password" required class="auth-input">
+          <div id="auth-confirm-group" style="display:none;">
+            <input id="auth-confirm" type="password" placeholder="Confirm Password" class="auth-input">
+          </div>
+          <button type="submit" id="auth-submit" class="btn-modern btn-gradient auth-submit-btn"><i class="fas fa-sign-in-alt"></i> <span>Login</span></button>
+        </form>
+        <div class="auth-switch-row">
+          <span id="auth-switch-text">Don't have an account?</span>
+          <a href="#" id="auth-switch-link">Sign up</a>
+        </div>
+        <div id="auth-message" class="auth-message"></div>
+      </div>
+    </div>
+    <!-- End Modal HTML -->
+    <!-- Cart Modal/Panel -->
+      <div id="cart-modal" style="display:none;position:fixed;top:0;right:0;width:360px;max-width:95vw;height:100vh;background:#0f0f0f;color:#e5e7eb;box-shadow:-6px 0 24px rgba(0,0,0,0.5);z-index:1200;flex-direction:column;border-left:1px solid #333;">
+      <div style="padding:1.2rem 1.5rem;border-bottom:1px solid #333;display:flex;align-items:center;justify-content:space-between;">
+        <h3 style="margin:0;color:#FFD700;font-size:1.2rem;font-weight:700;">Your Cart</h3>
+        <button id="cart-close-btn" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#9ca3af;"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="cart-items" style="flex:1;overflow-y:auto;padding:1.2rem;"></div>
+      <div style="padding:1rem 1.5rem;border-top:1px solid #333;text-align:right;">
+        <span id="cart-total" style="font-weight:700;font-size:1.1rem;color:#e5e7eb;">Total: ฿0</span>
+        <button style="margin-left:1rem;padding:0.7em 1.8em;background:#FFD700;color:#000;border:none;border-radius:2em;font-weight:600;cursor:pointer;">Checkout</button>
+      </div>
+    </div>
+
+    <!-- My Bookings Modal -->
+    <div id="my-bookings-modal" class="modal-glass" style="display:none;">
+      <div class="bookings-modal-content">
+        <button class="bookings-close-btn" onclick="closeMyBookings()">&times;</button>
+        <div class="bookings-header">
+          <div class="bookings-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h2 class="bookings-title">My Bookings</h2>
+          <p class="bookings-subtitle">Manage your service bookings and consultations</p>
+        </div>
+        <div id="my-bookings-list" class="bookings-container"></div>
+      </div>
+    </div>
+
+    <!-- Admin Message Notification -->
+    <div id="admin-message-notification" class="admin-notification" style="display:none;">
+        <div class="notification-icon">
+            <i class="fas fa-envelope"></i>
+        </div>
+        <div class="notification-content">
+            <div class="notification-title">Message from User</div>
+            <div class="notification-message">"New message received"</div>
+            <div class="notification-subtitle">Click to view conversation</div>
+        </div>
+        <div class="notification-actions">
+            <button class="notification-btn close-btn" onclick="closeAdminNotification()">Close</button>
+            <button class="notification-btn view-btn" onclick="viewAdminMessages()">View Messages</button>
+        </div>
+    </div>
+
+    <!-- User Chat Modal -->
+    <div id="user-chat-modal" class="modal-glass" style="display:none;">
+      <div class="chat-modal-content">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="chat-header-text">
+              <h3 class="chat-title">Support Chat</h3>
+              <p class="chat-subtitle">Booking <span id="chat-booking-id"></span></p>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <button class="chat-action-btn" title="Call">
+              <i class="fas fa-phone"></i>
+            </button>
+            <button class="chat-action-btn" title="Video Call">
+              <i class="fas fa-video"></i>
+            </button>
+            <button class="chat-action-btn" title="Info">
+              <i class="fas fa-info-circle"></i>
+            </button>
+            <button class="chat-close-btn" onclick="closeUserChat()" title="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div id="user-chat-box" class="chat-messages"></div>
+        
+        <div class="chat-input-container">
+          <div class="chat-input-wrapper">
+            <button class="chat-attachment-btn" title="Attach file">
+              <i class="fas fa-paperclip"></i>
+            </button>
+            <input id="user-chat-input" type="text" placeholder="Type a message..." class="chat-input">
+            <button class="chat-emoji-btn" title="Add emoji">
+              <i class="fas fa-smile"></i>
+            </button>
+            <button onclick="sendUserMessage()" class="chat-send-btn" title="Send message">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/add-darkveil-services.js"></script>
+    <script src="js/tilted-service-cards.js"></script>
+    <!-- User Settings Modal -->
+    <div id="user-settings-modal" class="modal-glass" style="display:none;">
+      <div class="user-settings-content">
+        <button class="auth-close-btn" onclick="document.getElementById('user-settings-modal').style.display='none'">&times;</button>
+        <h2 class="auth-title">Account Settings</h2>
+        <form id="user-settings-form">
+          <label for="settings-email">Email</label>
+          <input id="settings-email" type="email" class="auth-input" disabled>
+          <label for="settings-phone">Phone Number</label>
+          <input id="settings-phone" type="tel" class="auth-input" placeholder="Enter phone number">
+          <label for="settings-password">New Password</label>
+          <input id="settings-password" type="password" class="auth-input" placeholder="New password">
+          <label for="settings-password-confirm">Confirm Password</label>
+          <input id="settings-password-confirm" type="password" class="auth-input" placeholder="Confirm new password">
+          <button type="submit" class="btn-modern btn-gradient auth-submit-btn">Save Changes</button>
+        </form>
+        <div id="settings-message" class="auth-message"></div>
+        <button id="logout-btn" class="btn-modern btn-logout" style="width:100%;margin-top:1.5em;">Logout</button>
+      </div>
+    </div>
+    <script>
+      // Redirect Login button to dedicated user login page
+      document.getElementById('login-btn').onclick = function() {
+        window.location.href = 'login.html';
+      };
+      // Modal switch logic
+      document.getElementById('auth-switch-link').onclick = function(e) {
+        e.preventDefault();
+        const isLogin = document.getElementById('auth-title').textContent === 'Login';
+        setAuthMode(isLogin ? 'signup' : 'login');
+      };
+      function setAuthMode(mode) {
+        if (mode === 'signup') {
+          document.getElementById('auth-title').textContent = 'Sign Up';
+          document.getElementById('auth-submit').textContent = 'Sign Up';
+          document.getElementById('auth-switch-text').textContent = 'Already have an account?';
+          document.getElementById('auth-switch-link').textContent = 'Login';
+          document.getElementById('auth-confirm-group').style.display = '';
+        } else {
+          document.getElementById('auth-title').textContent = 'Login';
+          document.getElementById('auth-submit').textContent = 'Login';
+          document.getElementById('auth-switch-text').textContent = "Don't have an account?";
+          document.getElementById('auth-switch-link').textContent = 'Sign up';
+          document.getElementById('auth-confirm-group').style.display = 'none';
+        }
+        document.getElementById('auth-message').textContent = '';
+        document.getElementById('auth-form').reset();
+      }
+      function toTitleCase(str){
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      }
+      function nameFromEmail(email){
+        try{
+          const local = (email || '').split('@')[0] || '';
+          const parts = local.split(/[._-]+/).filter(Boolean);
+          if(parts.length){ return parts.map(toTitleCase).join(' '); }
+          return toTitleCase(local);
+        }catch(_){ return 'User'; }
+      }
+      function demoLogin(emailInput) {
+        // Fallback when running file:// or demo_mode – log in as a normal site user
+        const friendly = nameFromEmail(emailInput || 'demo@example.com');
+        const demoUser = { id: 'demo-user-id', name: friendly || 'User', role: 'user', email: emailInput || 'demo@example.com' };
+        localStorage.setItem('user', JSON.stringify(demoUser));
+        localStorage.setItem('token', 'demo');
+        updateAuthUI(demoUser);
+        document.getElementById('auth-message').style.color = 'green';
+        document.getElementById('auth-message').textContent = 'Logged in (demo)';
+        setTimeout(() => { document.getElementById('auth-modal').style.display = 'none'; }, 600);
+      }
+
+      // Alert function for showing messages
+      function showAlert(message, type = 'success') {
+        const alertDiv = document.createElement('div');
+        alertDiv.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 12px 20px;
+          border-radius: 8px;
+          color: white;
+          font-weight: 500;
+          z-index: 10000;
+          animation: slideIn 0.3s ease;
+          ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
+        `;
+        alertDiv.textContent = message;
+        document.body.appendChild(alertDiv);
+        
+        setTimeout(() => {
+          alertDiv.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => document.body.removeChild(alertDiv), 300);
+        }, 3000);
+      }
+
+      // Add CSS animations
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Dropdown item hover effect */
+        .dropdown-item:hover {
+          background-color: #f5f5f5;
+        }
+        
+        /* Smooth transition for dropdown items */
+        .dropdown-item {
+          transition: background-color 0.2s ease;
+        }
+        
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Toast Notification Popup (reused from admin) */
+        .toast-notification {
+          position: fixed !important;
+          top: 20px !important;
+          right: 20px !important;
+          background: var(--card-bg, #111827) !important;
+          color: var(--text-color, #e5e7eb) !important;
+          border: 1px solid var(--border-color, #374151) !important;
+          border-radius: 12px !important;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
+          width: 340px !important;
+          max-width: calc(100vw - 40px) !important;
+          z-index: 99999 !important;
+          transform: translateX(120%) !important;
+          transition: transform .35s ease !important;
+          padding: 14px !important;
+        }
+        .toast-notification.show { transform: translateX(0) !important; }
+        .toast-notification .toast-header { display:flex; align-items:center; margin-bottom:8px; font-weight:700; color: var(--primary-color, #FFD700); }
+        .toast-notification .toast-icon { font-size:20px; margin-right:10px; color: var(--primary-color, #FFD700); animation: bounce 1s ease-in-out infinite; }
+        .toast-notification .toast-body { font-size:14px; line-height:1.4; margin-bottom:12px; }
+        .toast-notification .toast-actions { display:flex; gap:10px; justify-content:flex-end; }
+        .toast-notification .toast-btn { padding:6px 12px; border-radius:8px; border:1px solid var(--border-color, #374151); background:transparent; color:inherit; cursor:pointer; }
+        .toast-notification .toast-btn.primary { background: var(--primary-color, #FFD700); color:#111; border-color:#d1b300; font-weight:700; }
+        @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0);} 40%{transform:translateY(-5px);} 60%{transform:translateY(-3px);} }
+        
+        /* Admin Message Notification Styles */
+        .admin-notification {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: #FFD700;
+          color: #000;
+          border-radius: 12px;
+          padding: 16px;
+          box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+          border: 2px solid #B8860B;
+          max-width: 350px;
+          width: 100%;
+          z-index: 10000;
+          animation: notificationSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          font-family: 'Inter', sans-serif;
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        @keyframes notificationSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(100px) translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) translateX(0);
+          }
+        }
+
+        .notification-icon {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          color: #000;
+          flex-shrink: 0;
+        }
+
+        .notification-content {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .notification-title {
+          font-weight: 700;
+          font-size: 16px;
+          margin-bottom: 4px;
+          color: #000;
+        }
+
+        .notification-message {
+          font-size: 14px;
+          margin-bottom: 4px;
+          color: #333;
+          font-style: italic;
+          word-wrap: break-word;
+          max-width: 100%;
+        }
+
+        .notification-subtitle {
+          font-size: 12px;
+          color: #666;
+          margin-bottom: 12px;
+        }
+
+        .notification-actions {
+          display: flex;
+          gap: 8px;
+          margin-top: 12px;
+        }
+
+        .notification-btn {
+          padding: 8px 14px;
+          border: none;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .notification-btn.close-btn {
+          background: rgba(0, 0, 0, 0.1);
+          color: #333;
+        }
+
+        .notification-btn.close-btn:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .notification-btn.view-btn {
+          background: #000;
+          color: #FFD700;
+        }
+
+        .notification-btn.view-btn:hover {
+          background: #333;
+          transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+          .admin-notification {
+            bottom: 10px;
+            right: 10px;
+            left: 10px;
+            max-width: none;
+            width: auto;
+          }
+        }
+
+        /* My Bookings Modal Styles */
+        .bookings-modal-content {
+          background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+          border-radius: 20px;
+          width: 800px;
+          max-width: 95vw;
+          max-height: 90vh;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+          overflow: hidden;
+          border: 2px solid #FFD700;
+          position: relative;
+          animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalSlideIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8) translateY(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .bookings-close-btn {
+          position: absolute;
+          top: 20px;
+          right: 25px;
+          background: none;
+          border: none;
+          font-size: 28px;
+          color: #FFD700;
+          cursor: pointer;
+          z-index: 10;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .bookings-close-btn:hover {
+          background: rgba(255, 215, 0, 0.1);
+          transform: rotate(90deg);
+        }
+
+        .bookings-header {
+          background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+          padding: 40px 30px;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .bookings-header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+          opacity: 0.3;
+        }
+
+        .bookings-icon {
+          width: 80px;
+          height: 80px;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 20px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .bookings-icon i {
+          font-size: 36px;
+          color: #000;
+        }
+
+        .bookings-title {
+          font-size: 32px;
+          font-weight: 700;
+          color: #000;
+          margin: 0 0 10px 0;
+          position: relative;
+          z-index: 2;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .bookings-subtitle {
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.7);
+          margin: 0;
+          position: relative;
+          z-index: 2;
+          font-weight: 500;
+        }
+
+        .bookings-container {
+          padding: 30px;
+          max-height: 500px;
+          overflow-y: auto;
+          background: #000;
+        }
+
+        .bookings-container::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .bookings-container::-webkit-scrollbar-track {
+          background: #1a1a1a;
+          border-radius: 4px;
+        }
+
+        .bookings-container::-webkit-scrollbar-thumb {
+          background: #FFD700;
+          border-radius: 4px;
+        }
+
+        .bookings-container::-webkit-scrollbar-thumb:hover {
+          background: #B8860B;
+        }
+
+        /* Empty State */
+        .bookings-empty {
+          text-align: center;
+          padding: 60px 20px;
+          color: #888;
+        }
+
+        .bookings-empty i {
+          font-size: 64px;
+          color: #333;
+          margin-bottom: 20px;
+          display: block;
+        }
+
+        .bookings-empty h3 {
+          color: #FFD700;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        .bookings-empty p {
+          font-size: 16px;
+          line-height: 1.5;
+        }
+
+        /* Booking Cards */
+        .booking-card {
+          background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+          border: 1px solid #333;
+          border-radius: 15px;
+          padding: 25px;
+          margin-bottom: 20px;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .booking-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: linear-gradient(135deg, #FFD700, #B8860B);
+        }
+
+        .booking-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+          border-color: #FFD700;
+        }
+
+        .booking-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 20px;
+        }
+
+        .booking-service {
+          font-size: 20px;
+          font-weight: 700;
+          color: #FFD700;
+          margin: 0;
+        }
+
+        .booking-status {
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+          background: rgba(255, 193, 7, 0.2);
+          color: #FFC107;
+          border: 1px solid #FFC107;
+        }
+
+        .status-confirmed {
+          background: rgba(40, 167, 69, 0.2);
+          color: #28a745;
+          border: 1px solid #28a745;
+        }
+
+        .status-completed {
+          background: rgba(23, 162, 184, 0.2);
+          color: #17a2b8;
+          border: 1px solid #17a2b8;
+        }
+
+        .status-cancelled {
+          background: rgba(220, 53, 69, 0.2);
+          color: #dc3545;
+          border: 1px solid #dc3545;
+        }
+
+        .booking-details {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+
+        .booking-detail {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #ccc;
+          font-size: 14px;
+        }
+
+        .booking-detail i {
+          color: #FFD700;
+          width: 16px;
+          text-align: center;
+        }
+
+        .booking-actions {
+          display: flex;
+          gap: 10px;
+          justify-content: flex-end;
+        }
+
+        .booking-btn {
+          padding: 8px 16px;
+          border: none;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .booking-btn-primary {
+          background: linear-gradient(135deg, #FFD700, #B8860B);
+          color: #000;
+        }
+
+        .booking-btn-primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        .booking-btn-secondary {
+          background: transparent;
+          color: #FFD700;
+          border: 1px solid #FFD700;
+        }
+
+        .booking-btn-secondary:hover {
+          background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Loading State */
+        .bookings-loading {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 60px 20px;
+          color: #FFD700;
+        }
+
+        .bookings-loading i {
+          font-size: 48px;
+          margin-bottom: 20px;
+          animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .bookings-loading p {
+          font-size: 18px;
+          margin: 0;
+        }
+
+        /* Error State */
+        .bookings-error {
+          text-align: center;
+          padding: 60px 20px;
+          color: #dc3545;
+        }
+
+        .bookings-error i {
+          font-size: 64px;
+          margin-bottom: 20px;
+          display: block;
+        }
+
+        .bookings-error h3 {
+          color: #dc3545;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        .bookings-error p {
+          font-size: 16px;
+          line-height: 1.5;
+          color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .bookings-modal-content {
+            width: 95vw;
+            margin: 20px;
+          }
+
+          .bookings-header {
+            padding: 30px 20px;
+          }
+
+          .bookings-title {
+            font-size: 24px;
+          }
+
+          .bookings-container {
+            padding: 20px;
+          }
+
+          .booking-details {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .booking-actions {
+            flex-direction: column;
+          }
+
+          .booking-btn {
+            justify-content: center;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Compute initials from name or email (e.g., "Achira Nontabut" → "AN")
+      function getInitials(name, email){
+        try {
+          if (name && typeof name === 'string'){
+            const parts = name.trim().split(/\s+/).filter(Boolean);
+            if (parts.length >= 2){
+              return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+            }
+            const letters = Array.from(parts[0] || '');
+            if (letters.length >= 2) return (letters[0] + letters[1]).toUpperCase();
+            if (letters.length === 1) return letters[0].toUpperCase();
+          }
+          if (email && typeof email === 'string'){
+            const local = email.split('@')[0] || '';
+            const tokens = local.split(/[._-]+/).filter(Boolean);
+            if (tokens.length >= 2){
+              return (tokens[0][0] + tokens[tokens.length - 1][0]).toUpperCase();
+            }
+            const chs = Array.from(local);
+            if (chs.length >= 2) return (chs[0] + chs[1]).toUpperCase();
+            if (chs.length === 1) return chs[0].toUpperCase();
+          }
+        } catch(_){}
+        return 'U';
+      }
+
+      function getDisplayName(user){
+        const n = (user?.name || '').trim();
+        if (n && n.toLowerCase() !== 'demo user') return n;
+        return nameFromEmail(user?.email) || 'User';
+      }
+      function updateAuthUI(user){
+        try {
+          const loginLi = document.getElementById('nav-login-btn-li');
+          const userLi = document.getElementById('nav-user');
+          if (loginLi) loginLi.style.display = 'none';
+          if (userLi) {
+            userLi.style.display = 'flex';
+            const displayName = getDisplayName(user);
+            const initials = getInitials(displayName, user?.email);
+            const badge = document.getElementById('nav-user-initials');
+            const nameDisplay = document.getElementById('nav-user-name');
+            if (badge) badge.textContent = initials;
+            if (nameDisplay) {
+              // Show email next to initials for clarity
+              nameDisplay.textContent = user?.email || displayName;
+              nameDisplay.title = displayName && user?.email ? displayName : (user?.email || displayName);
+            }
+            console.debug('[auth] UI updated for user', { name: displayName, email: user?.email });
+          }
+        } catch(_) {}
+      }
+
+      // Deprecated checkExistingAuth() call removed to avoid double-handling; use checkAuth() below on load
+
+      // Submit logic (production: requires backend)
+      document.getElementById('auth-form').onsubmit = async function(e) {
+        e.preventDefault();
+        const mode = document.getElementById('auth-title').textContent.toLowerCase();
+        const email = document.getElementById('auth-email').value;
+        const password = document.getElementById('auth-password').value;
+        const confirm = document.getElementById('auth-confirm') ? document.getElementById('auth-confirm').value : '';
+        let url = '', body = {};
+        if (mode === 'sign up' || mode === 'signup') {
+          if (password !== confirm) {
+            document.getElementById('auth-message').textContent = 'Passwords do not match!';
+            return;
+          }
+          url = '/api/auth/register';
+          body = { name: email.split('@')[0], email, password };
+        } else {
+          url = '/api/auth/login';
+          body = { email, password };
+        }
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            // Store token and user and stay on main site
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            updateAuthUI(data.user);
+            // Initialize global notifications for this user
+            try { 
+              window.loggedInEmail = data.user?.email?.toLowerCase(); 
+              console.log('[FRONTEND] Setting loggedInEmail:', window.loggedInEmail);
+              initGlobalNotifications(); 
+            } catch(e) {
+              console.error('[FRONTEND] Error initializing global notifications:', e);
+            }
+            document.getElementById('auth-message').style.color = 'green';
+            document.getElementById('auth-message').textContent = 'Login successful';
+            setTimeout(() => { document.getElementById('auth-modal').style.display = 'none'; }, 600);
+          } else {
+            document.getElementById('auth-message').style.color = '#ef4444';
+            document.getElementById('auth-message').textContent = data.message || 'Authentication failed.';
+          }
+        } catch (err) {
+          document.getElementById('auth-message').style.color = '#ef4444';
+          document.getElementById('auth-message').textContent = 'Network error. Please try again.';
+        }
+      };
+    </script>
+
+    <!-- Lightweight Auto Chat Widget -->
+    <script>
+      (function() {
+        // Avoid double init
+        if (window.__jysChatInitialized) return; 
+        window.__jysChatInitialized = true;
+
+        // Styles
+        const style = document.createElement('style');
+        style.textContent = `
+          .wc-chat-toggle { position: fixed; right: 20px; bottom: 20px; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg,#FFD700,#B8860B); color:#000; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 24px rgba(0,0,0,.18); cursor:pointer; z-index:10000; }
+          .wc-chat-badge { position:absolute; top:-6px; right:-6px; background:#ef4444; color:#fff; font-size:11px; font-weight:700; border-radius:12px; padding:2px 6px; box-shadow:0 4px 10px rgba(239,68,68,.4); }
+          .wc-chat { position: fixed; right: 20px; bottom: 88px; width: 340px; height: 480px; max-height: calc(100vh - 120px); background:#111; color:#fff; border-radius:16px; box-shadow:0 16px 40px rgba(0,0,0,.18); overflow:hidden; display:none; flex-direction:column; z-index:10000; border:1px solid #333; }
+          .wc-chat.open { display:flex; }
+          .wc-header { background: linear-gradient(135deg,#000000,#1a1a1a); color:#FFD700; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #333; }
+          .wc-h-left { display:flex; align-items:center; gap:10px; }
+          .wc-h-avatar { width:32px; height:32px; border-radius:8px; background:rgba(255,215,0,.25); color:#FFD700; display:flex; align-items:center; justify-content:center; }
+          .wc-h-name { font-weight:700; }
+          .wc-body { flex:1; background:#0b0b0b; padding:14px; overflow:auto; }
+          .wc-msg { max-width:80%; margin:8px 0; padding:10px 12px; border-radius:12px; font-size:14px; line-height:1.4; box-shadow:0 1px 3px rgba(0,0,0,.25); }
+          .wc-msg.bot { background:#111; color:#e5e7eb; border:1px solid #333; }
+          .wc-msg.user { background: linear-gradient(135deg,#FFD700,#B8860B); color:#000; margin-left:auto; }
+          .wc-time { font-size:11px; color:#9ca3af; margin-top:4px; }
+          .wc-input { border-top:1px solid #333; background:#0f0f0f; padding:10px; }
+          .wc-input-row { display:flex; gap:8px; }
+          .wc-text { flex:1; border:1px solid #333; background:#0b0b0b; color:#e5e7eb; padding:10px 12px; border-radius:20px; outline:none; font-size:14px; }
+          .wc-send { width:40px; height:40px; border:none; border-radius:50%; background: linear-gradient(135deg,#FFD700,#B8860B); color:#000; cursor:pointer; }
+          .wc-suggestions { display:flex; flex-wrap:wrap; gap:8px; padding:8px 10px; border-top:1px solid #333; background:#0f0f0f; }
+          .wc-chip { border:1px solid #333; background:#111; color:#e5e7eb; border-radius:16px; padding:6px 10px; font-size:12px; cursor:pointer; }
+          @media(max-width:480px){ .wc-chat{ right:10px; left:10px; width:auto; } }
+        `;
+        document.head.appendChild(style);
+
+        // DOM
+        const toggle = document.createElement('div');
+        toggle.className = 'wc-chat-toggle';
+        toggle.innerHTML = '<span class="wc-chat-badge" id="wc-badge" style="display:none;">1</span><i class="fas fa-comments"></i>';
+
+        const chat = document.createElement('div');
+        chat.className = 'wc-chat';
+        chat.innerHTML = `
+          <div class="wc-header">
+            <div class="wc-h-left">
+              <div class="wc-h-avatar"><i class="fas fa-robot"></i></div>
+              <div>
+                <div class="wc-h-name">JYS Assistant</div>
+                <div style="opacity:.9;font-size:12px;">Online • Typically replies instantly</div>
+              </div>
+            </div>
+            <button id="wc-close" title="Close" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">&times;</button>
+          </div>
+          <div class="wc-body" id="wc-body"></div>
+          <div class="wc-suggestions" id="wc-suggestions"></div>
+          <div class="wc-input">
+            <div class="wc-input-row">
+              <input type="text" id="wc-text" class="wc-text" placeholder="Start a new message" autocomplete="off" />
+              <button id="wc-send" class="wc-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(toggle);
+        document.body.appendChild(chat);
+
+        const bodyEl = chat.querySelector('#wc-body');
+        const textEl = chat.querySelector('#wc-text');
+        const sendEl = chat.querySelector('#wc-send');
+        const badgeEl = toggle.querySelector('#wc-badge');
+        const suggEl = chat.querySelector('#wc-suggestions');
+
+        const suggestions = [
+          'Our Services',
+          'Pricing',
+          'Start Free Strategy Call',
+          'How fast can you start?'
+        ];
+
+        function addChip(label){
+          const chip = document.createElement('button');
+          chip.className = 'wc-chip';
+          chip.textContent = label;
+          chip.onclick = () => { sendUser(label); };
+          suggEl.appendChild(chip);
+        }
+        suggestions.forEach(addChip);
+
+        function timeNow(){ return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+        function addMsg(text, from='bot'){
+          const wrap = document.createElement('div');
+          wrap.className = `wc-msg ${from}`;
+          wrap.innerHTML = `${text}<div class="wc-time">${timeNow()}</div>`;
+          bodyEl.appendChild(wrap);
+          bodyEl.scrollTop = bodyEl.scrollHeight;
+        }
+
+        function openChat(){ chat.classList.add('open'); badgeEl.style.display='none'; setTimeout(()=>textEl.focus(),200); }
+        function closeChat(){ chat.classList.remove('open'); }
+
+        toggle.onclick = () => chat.classList.contains('open') ? closeChat() : openChat();
+        chat.querySelector('#wc-close').onclick = closeChat;
+
+        async function sendToSupport(userText){
+          // Create or reuse session
+          if (!window.__supportSessionId) {
+            try {
+              const r = await fetch('/api/support/start', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({}) });
+              const d = await r.json();
+              if (d.success) window.__supportSessionId = d.session.id;
+            } catch(_){}
+          }
+          try {
+            const resp = await fetch('/api/support/message', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ sessionId: window.__supportSessionId, sender: 'user', message: userText })
+            });
+            const data = await resp.json();
+            if (data.success && data.bot) addMsg(data.bot, 'bot');
+            else addMsg('Thanks! Our team will reply shortly.');
+          } catch (e) {
+            addMsg('Network error. Please try again.');
+          }
+        }
+
+        function sendUser(text){
+          if (!text) return; 
+          addMsg(text, 'user');
+          sendToSupport(text);
+        }
+
+        sendEl.onclick = () => { const v = textEl.value.trim(); textEl.value=''; sendUser(v); };
+        textEl.addEventListener('keypress', e => { if (e.key==='Enter'){ e.preventDefault(); sendEl.click(); }});
+
+        // Auto welcome once
+        function welcome(){
+          addMsg("Hi! I'm JYS Assistant, how can I help you?");
+          badgeEl.style.display = 'none';
+          openChat();
+        }
+        if (!localStorage.getItem('wc_welcomed')) {
+          setTimeout(()=>{ badgeEl.style.display='flex'; }, 1500);
+          setTimeout(()=>{ welcome(); localStorage.setItem('wc_welcomed','1'); }, 2000);
+        }
+      })();
+    </script>
+
+    <script>
+      // Authentication check with session fallback and debug logging
+      async function checkAuth() {
+        const navUser = document.getElementById('nav-user');
+        const navLoginBtn = document.getElementById('nav-login-btn-li');
+        try {
+          const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+          const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
+          console.debug('[auth] checkAuth start', { hasToken: !!token, hasUser: !!userStr });
+          if (token && userStr) {
+            try {
+              const user = JSON.parse(userStr);
+              updateAuthUI(user);
+              window.loggedInEmail = user?.email?.toLowerCase();
+              try { initGlobalNotifications(); } catch(_) {}
+              return;
+            } catch (e) {
+              console.warn('[auth] invalid stored user, clearing', e);
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              sessionStorage.removeItem('token');
+            }
+          }
+          // Session fallback: check server session
+          const checkRes = await fetch('/api/check', { credentials: 'include' });
+          if (checkRes.ok) {
+            const check = await checkRes.json();
+            console.debug('[auth] /api/check', check);
+            if (check.loggedIn) {
+              const userRes = await fetch('/api/user', { credentials: 'include' });
+              if (userRes.ok) {
+                const user = await userRes.json();
+                sessionStorage.setItem('user', JSON.stringify(user));
+                sessionStorage.setItem('token', 'session');
+                updateAuthUI(user);
+                window.loggedInEmail = user?.email?.toLowerCase();
+                try { initGlobalNotifications(); } catch(_) {}
+                return;
+              }
+            }
+          }
+          // Not authenticated
+          if (navUser) navUser.style.display = 'none';
+          if (navLoginBtn) navLoginBtn.style.display = '';
+        } catch (err) {
+          console.error('[auth] checkAuth error', err);
+          if (navUser) navUser.style.display = 'none';
+          if (navLoginBtn) navLoginBtn.style.display = '';
+        }
+      }
+
+      // Check auth on page load
+      checkAuth();
+
+      // Settings dropdown functionality
+      const userSettingsIcon = document.getElementById('user-settings-icon');
+      const userSettingsDropdown = document.getElementById('user-settings-dropdown');
+      const navUser = document.getElementById('nav-user');
+      const navUserName = document.getElementById('nav-user-name');
+      const navUserInitials = document.getElementById('nav-user-initials');
+      const logoutBtn = document.getElementById('logout-btn');
+      const changePasswordBtn = document.getElementById('change-password-btn');
+
+      // Toggle dropdown when clicking on user area or settings icon
+      function toggleDropdown() {
+        if (userSettingsDropdown.style.display === 'block') {
+          userSettingsDropdown.style.display = 'none';
+        } else {
+          userSettingsDropdown.style.display = 'block';
+          // Close dropdown when clicking outside
+          setTimeout(() => {
+            document.addEventListener('click', closeDropdownOnClickOutside);
+          }, 0);
+        }
+      }
+
+      function closeDropdown() {
+        userSettingsDropdown.style.display = 'none';
+        document.removeEventListener('click', closeDropdownOnClickOutside);
+      }
+
+      function closeDropdownOnClickOutside(e) {
+        if (!navUser.contains(e.target)) {
+          closeDropdown();
+        }
+      }
+
+      // Add click handlers
+      if (userSettingsIcon) {
+        userSettingsIcon.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleDropdown();
+        });
+      }
+
+      if (navUserInitials) {
+        navUserInitials.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleDropdown();
+        });
+      }
+
+      if (navUserName) {
+        navUserName.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleDropdown();
+        });
+      }
+
+      // Logout functionality
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+          try {
+            const response = await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+            // Clear client storage regardless
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('user');
+            // Close global notifications socket if open
+            try { if (globalNotificationWS) { globalNotificationWS.close(); globalNotificationWS = null; } } catch(_) {}
+            window.loggedInEmail = undefined;
+            if (response.ok) {
+              // Redirect to login page
+              window.location.href = 'login.html';
+            } else {
+              // Fallback redirect if server didn't respond OK
+              window.location.href = 'login.html';
+            }
+          } catch (error) {
+            console.error('Logout error:', error);
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+          }
+        });
+      }
+
+      // Change password functionality
+      if (changePasswordBtn) {
+        changePasswordBtn.addEventListener('click', () => {
+          // Here you would typically show a change password modal
+          // For now, we'll just show an alert
+          const newPassword = prompt('Enter your new password:');
+          if (newPassword) {
+            // In a real app, you would send this to your server
+            console.log('Password change requested');
+            showAlert('Password change functionality will be implemented here', 'info');
+          }
+        });
+      }
+
+      // Login button handler (defined earlier to go to login.html). Remove duplicate.
+
+      // Enhanced booking form
+      function openBooking(productId) {
+        console.log("Running openBooking in index.html");
+        
+        // Check if user is logged in using stored token and user data
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
+        
+        if (!token || !userStr) {
+          showAlert('Please login first to book a consultation.', 'error');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1500);
+          return;
+        }
+        
+        // Get user info if available
+        let userInfo = {};
+        try {
+          if (localStorage.getItem('user')) {
+            userInfo = JSON.parse(localStorage.getItem('user'));
+          } else if (sessionStorage.getItem('user')) {
+            userInfo = JSON.parse(sessionStorage.getItem('user'));
+          }
+        } catch (e) {
+          console.error('Error parsing user info:', e);
+        }
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'pricing-modal-overlay';
+        overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.75);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          backdrop-filter: blur(5px);
+        `;
+        overlay.innerHTML = `
+          <div class="pricing-modal" style="background: white; border-radius: 12px; width: 500px; max-width: 90%; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); overflow: hidden;">
+            <h3 style="margin: 0; padding: 1.5rem; border-bottom: 1px solid #eee; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; background: #f8f9fa;">
+              <i class="fas fa-calendar-check" style="color: var(--primary-color, #FFD700);"></i> Book a Consultation
+            </h3>
+            <div class="booking-form" style="padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 600; color: #333;">Name</label>
+                <input type="text" id="booking-name" placeholder="Your name" required
+                  style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem;"
+                  value="${userInfo?.name || ''}" />
+              </div>
+              <div class="field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 600; color: #333;">Email</label>
+                <input type="email" id="booking-email" placeholder="Your email" required
+                  style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem;"
+                  value="${userInfo?.email || ''}" />
+              </div>
+              <div class="field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 600; color: #333;">Phone (optional)</label>
+                <input type="tel" id="booking-phone" placeholder="Your phone number"
+                  style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem;" />
+              </div>
+              <div class="field" style="display: flex; flex-direction: column; gap: 0.5rem; grid-column: 1 / -1;">
+                <label style="font-weight: 600; color: #333;">Message</label>
+                <textarea id="booking-message" placeholder="Tell us about your project" rows="4"
+                  style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; resize: vertical;"></textarea>
+              </div>
+              <div class="field" style="display: flex; flex-direction: column; gap: 0.5rem; grid-column: 1 / -1;">
+                <label style="font-weight: 600; color: #333;">Service</label>
+                <input type="text" id="booking-service" disabled
+                  style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: #f5f5f5;" />
+              </div>
+              <div id="booking-error-message" style="color: #ef4444; font-size: 0.9rem; grid-column: 1 / -1; display: none; padding: 0.5rem 0;"></div>
+            </div>
+            <div class="pricing-actions" style="padding: 1.5rem; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 1rem;">
+              <button class="btn-small-sec" onclick="this.closest('.pricing-modal-overlay').remove()"
+                style="padding: 0.75rem 1.5rem; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; font-weight: 500;">Cancel</button>
+              <button class="btn-small-pri" id="booking-submit"
+                style="padding: 0.75rem 1.5rem; border: none; background: var(--primary-color, #FFD700); color: black; border-radius: 8px; cursor: pointer; font-weight: 600;">Book Now</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        
+        // Set the service name based on productId
+        const serviceNames = {
+          'meta-ads': 'Meta Ads Setup',
+          'seo': 'SEO Monthly Plan',
+          'funnels': 'Sales Funnel Build',
+          'consulting': 'Sales Consulting',
+          'consulting-plus': 'Sales Consulting & Deal Closing'
+        };
+        
+        overlay.querySelector('#booking-service').value = serviceNames[productId] || productId;
+
+        // Show the modal with animation
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+        }, 10);
+
+        // Handle form submission
+        overlay.querySelector('#booking-submit').onclick = async () => {
+          const submitBtn = overlay.querySelector('#booking-submit');
+          const name = overlay.querySelector('#booking-name').value.trim();
+          const email = overlay.querySelector('#booking-email').value.trim();
+          const phone = overlay.querySelector('#booking-phone').value.trim();
+          const message = overlay.querySelector('#booking-message').value.trim();
+
+          if (!name || !email) {
+            alert('Please fill in required fields');
+            return;
+          }
+
+          // Disable button and show loading state
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+          try {
+            // Show inline error instead of alert
+            const errorMessage = document.getElementById('booking-error-message');
+            errorMessage.style.display = 'none';
+            
+            // Use relative URL to work in all environments
+            const response = await fetch('/api/contacts', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify({
+                name,
+                email,
+                phone,
+                message,
+                service: productId
+              })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Success - close modal with animation
+              overlay.style.opacity = '0';
+              setTimeout(() => {
+                overlay.remove();
+                // Show success message
+                const successToast = document.createElement('div');
+                successToast.className = 'success-toast';
+                successToast.style.cssText = `
+                  position: fixed;
+                  bottom: 20px;
+                  right: 20px;
+                  background: #10b981;
+                  color: white;
+                  padding: 1rem 1.5rem;
+                  border-radius: 10px;
+                  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                  z-index: 1000;
+                  animation: slideIn 0.3s ease;
+                  max-width: 400px;
+                `;
+                successToast.innerHTML = `
+                  <div class="success-toast-content" style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+                    <span>Thank you for booking! Our team will contact you shortly.</span>
+                  </div>
+                `;
+                document.body.appendChild(successToast);
+                
+                // Auto remove toast after 5 seconds
+                setTimeout(() => {
+                  successToast.style.opacity = '0';
+                  setTimeout(() => successToast.remove(), 300);
+                }, 5000);
+                
+                // If chat widget exists, use it
+                if (typeof openChat === 'function' && typeof addMsg === 'function') {
+                  openChat();
+                  addMsg(`Thank you for booking! Our team will contact you shortly.`);
+                }
+                // Open chat for this booking
+                openUserChat(data.id, overlay.querySelector('#booking-service').value);
+              }, 300);
+            } else {
+              // Error handling - show inline error
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = 'Book Now';
+              
+              const errorMessage = document.getElementById('booking-error-message');
+              errorMessage.textContent = data.message || 'Failed to submit booking. Please try again.';
+              errorMessage.style.display = 'block';
+            }
+          } catch (error) {
+            console.error('Booking error:', error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Book Now';
+            
+            const errorMessage = document.getElementById('booking-error-message');
+            errorMessage.textContent = 'Network error. Please try again.';
+            errorMessage.style.display = 'block';
+          }
+        };
+        
+        // Close on ESC key
+        document.addEventListener('keydown', function escListener(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escListener);
+          }
+        });
+        
+        // Close on outside click
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            overlay.remove();
+          }
+        });
+      }
+
+    </script>
+    <!-- DarkVeil Background System -->
+    <script src="js/DarkVeil.js"></script>
+    <script src="js/add-darkveil.js"></script>
+    <script type="module" src="js/add-particles.js"></script>
+    <script src="js/click-spark.js"></script>
+    <script>
+      (function(){
+        function isTouch(){
+          return ('ontouchstart' in window) || (navigator.maxTouchPoints||0) > 0;
+        }
+        function applyTilt(card, opts){
+          if (!card || card.dataset.tiltInitialized === '1') return;
+          card.dataset.tiltInitialized = '1';
+
+          var attrAmp = card.getAttribute('data-tilt-amplitude');
+          var amplitude = (attrAmp !== null && attrAmp !== '') ? parseFloat(attrAmp) : ((opts && typeof opts.rotateAmplitude === 'number') ? opts.rotateAmplitude : 14);
+          var scaleOnHover = (opts && opts.scaleOnHover) || 1.1;
+
+          // Prepare styles
+          card.style.transformStyle = 'preserve-3d';
+          card.style.willChange = 'transform';
+          card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+          card.style.transition = 'transform 300ms cubic-bezier(0.22,1,0.36,1)';
+
+        
+
+          var rect = null;
+          var rafId = null;
+          var hovering = false;
+
+          function updateTransform(clientX, clientY){
+            if (!rect) rect = card.getBoundingClientRect();
+            var offsetX = clientX - rect.left - rect.width / 2;
+            var offsetY = clientY - rect.top - rect.height / 2;
+            var nx = offsetX / (rect.width / 2);
+            var ny = offsetY / (rect.height / 2);
+            var rotX = -ny * amplitude;
+            var rotY = nx * amplitude;
+            card.style.transition = 'transform 40ms linear';
+            card.style.transform = 'perspective(800px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(' + scaleOnHover + ')';
+            // Tooltip follow
+            tooltip.style.opacity = '1';
+            var tx = clientX - rect.left;
+            var ty = clientY - rect.top;
+            tooltip.style.left = tx + 'px';
+            tooltip.style.top = ty + 'px';
+          }
+
+          function onEnter(){
+            hovering = true;
+            tooltip.style.opacity = '1';
+          }
+          function onMove(e){
+            if (!hovering) return;
+            var cx = e.clientX, cy = e.clientY;
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(function(){ updateTransform(cx, cy); });
+          }
+          function onLeave(){
+            hovering = false;
+            card.style.transition = 'transform 400ms cubic-bezier(0.22,1,0.36,1)';
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+            tooltip.style.opacity = '0';
+          }
+
+          if (amplitude > 0) {
+            card.addEventListener('mouseenter', onEnter);
+            card.addEventListener('mousemove', onMove);
+            card.addEventListener('mouseleave', onLeave);
+          }
+        }
+        function initTilt(){
+          if (isTouch()) return; // skip on touch devices
+          var allowedTitles = new Set([
+            'Meta Ads Management',
+            'SEO Optimization',
+            'Sales Funnel Optimization',
+            'Sales Consulting',
+            'Sales Consulting & Deal Closing'
+          ]);
+          var cards = Array.from(document.querySelectorAll('.service-card-modern'));
+          var bodyAmpAttr = document.body.getAttribute('data-tilt-amplitude');
+          var defaultAmp = (bodyAmpAttr !== null && bodyAmpAttr !== '') ? parseFloat(bodyAmpAttr) : 14;
+          cards.forEach(function(card){
+            var h = card.querySelector('h3');
+            var title = h ? h.textContent.trim() : '';
+            if (allowedTitles.has(title)) {
+              applyTilt(card, { rotateAmplitude: defaultAmp, scaleOnHover: 1.1 });
+            }
+          });
+        }
+        if (document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', initTilt);
+        } else {
+          initTilt();
+        }
+      })();
+    </script>
+
+    <script>
+      function getApiUrl(p){
+        try {
+          if (location.origin && location.origin.startsWith('http')) {
+            return location.origin.replace(/\/$/, '') + p;
+          }
+        } catch(_){ }
+        return 'http://localhost:4000' + p;
+      }
+
+      async function openMyBookings() {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) {
+          showAlert('Please login to view your bookings', 'error');
+          setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+          return;
+        }
+        document.getElementById('my-bookings-modal').style.display = 'block';
+        const list = document.getElementById('my-bookings-list');
+        
+        // Show loading state
+        list.innerHTML = `
+          <div class="bookings-loading">
+            <i class="fas fa-spinner"></i>
+            <p>Loading your bookings...</p>
+          </div>
+        `;
+        
+        try {
+          const res = await fetch(getApiUrl('/api/my-bookings'), { credentials: 'include' });
+          const ct = res.headers.get('content-type') || '';
+          const text = await res.text();
+          let data;
+          if (ct.includes('application/json')) {
+            try { data = JSON.parse(text); } catch (_) { throw new Error('Invalid server response'); }
+          } else {
+            throw new Error(text.slice(0, 160));
+          }
+          if (!res.ok) {
+            throw new Error(data && data.message ? data.message : `HTTP ${res.status}`);
+          }
+          const bookings = Array.isArray(data) ? data : [];
+          
+          if (bookings.length === 0) {
+            list.innerHTML = `
+              <div class="bookings-empty">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No Bookings Yet</h3>
+                <p>You haven't made any service bookings yet.<br>Browse our services and book your first consultation!</p>
+              </div>
+            `;
+          } else {
+            // Create beautiful booking cards
+            const bookingCards = bookings.map(booking => {
+              const statusClass = `status-${(booking.status || 'pending').toLowerCase()}`;
+              const createdDate = new Date(booking.created_at);
+              const serviceIcon = getServiceIcon(booking.service);
+              
+              return `
+                <div class="booking-card">
+                  <div class="booking-header">
+                    <h3 class="booking-service">
+                      <i class="${serviceIcon}"></i>
+                      ${booking.service || 'Service Booking'}
+                    </h3>
+                    <span class="booking-status ${statusClass}">
+                      ${(booking.status || 'pending').toUpperCase()}
+                    </span>
+                  </div>
+                  
+                  <div class="booking-details">
+                    <div class="booking-detail">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>Created: ${createdDate.toLocaleDateString()}</span>
+                    </div>
+                    <div class="booking-detail">
+                      <i class="fas fa-clock"></i>
+                      <span>Time: ${createdDate.toLocaleTimeString()}</span>
+                    </div>
+                    <div class="booking-detail">
+                      <i class="fas fa-user"></i>
+                      <span>Booking ID: #${booking.id}</span>
+                    </div>
+                    <div class="booking-detail">
+                      <i class="fas fa-envelope"></i>
+                      <span>${booking.email || 'No email'}</span>
+                    </div>
+                  </div>
+                  
+                  ${booking.message ? `
+                    <div class="booking-detail" style="grid-column: 1 / -1; margin-top: 10px;">
+                      <i class="fas fa-comment"></i>
+                      <span style="font-style: italic;">"${booking.message}"</span>
+                    </div>
+                  ` : ''}
+                  
+                  <div class="booking-actions">
+                    <button class="booking-btn booking-btn-primary" onclick="openUserChat(${booking.id}, '${booking.service}')">
+                      <i class="fas fa-comments"></i>
+                      Open Chat
+                    </button>
+                    <button class="booking-btn booking-btn-secondary" onclick="viewBookingDetails(${booking.id})">
+                      <i class="fas fa-eye"></i>
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+            
+            list.innerHTML = bookingCards;
+          }
+        } catch (e) {
+          const safe = (e && e.message ? e.message : String(e) || 'Unknown error').replace(/</g, '&lt;');
+          list.innerHTML = `
+            <div class="bookings-error">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h3>Error Loading Bookings</h3>
+              <p>${safe}</p>
+            </div>
+          `;
+        }
+      }
+
+      // Helper function to get service icons
+      function getServiceIcon(service) {
+        const iconMap = {
+          'Meta Ads Management': 'fab fa-facebook',
+          'Meta Ads Setup': 'fab fa-facebook',
+          'SEO Optimization': 'fas fa-search',
+          'SEO Monthly Plan': 'fas fa-search',
+          'Sales Funnel Optimization': 'fas fa-funnel-dollar',
+          'Sales Funnel Build': 'fas fa-funnel-dollar',
+          'Sales Consulting': 'fas fa-chart-line',
+          'Sales Consulting & Deal Closing': 'fas fa-handshake'
+        };
+        
+        return iconMap[service] || 'fas fa-briefcase';
+      }
+
+      // Helper function to view booking details (placeholder)
+      function viewBookingDetails(bookingId) {
+        showAlert(`Viewing details for booking #${bookingId}`, 'info');
+        // This could open another modal with detailed booking information
+      }
+
+      function closeMyBookings() {
+        document.getElementById('my-bookings-modal').style.display = 'none';
+      }
+
+      let userChatWS = null;
+      let globalNotificationWS = null;
+
+      // Helper to build WS URL (supports overriding in production)
+      function getWSUrl() {
+        const base = (window.__WS_BASE__ && typeof window.__WS_BASE__ === 'string')
+          ? window.__WS_BASE__
+          : ((location.protocol === 'https:' ? 'wss://' : 'ws://') + (location.host || 'localhost:4000'));
+        const path = (window.__WS_PATH__ && typeof window.__WS_PATH__ === 'string') ? window.__WS_PATH__ : '/';
+        // Ensure exactly one slash between base and path
+        const sep = base.endsWith('/') ? '' : '/';
+        const p = path.startsWith('/') ? path.slice(1) : path;
+        return base + sep + p;
+      }
+
+      // Initialize global WebSocket for notifications when user is logged in
+      function initGlobalNotifications() {
+        console.log('[FRONTEND] initGlobalNotifications called');
+        console.log('[FRONTEND] window.loggedInEmail:', window.loggedInEmail);
+        
+        if (globalNotificationWS) {
+          console.log('[FRONTEND] Closing existing global notification WebSocket');
+          globalNotificationWS.close();
+        }
+        
+        const wsUrl = getWSUrl();
+        console.log('[FRONTEND] WebSocket URL:', wsUrl);
+        try {
+          globalNotificationWS = new WebSocket(wsUrl);
+          console.log('[FRONTEND] Created new global notification WebSocket');
+        } catch (e) {
+          console.error('[FRONTEND] Failed to open Global WS:', e);
+          return;
+        }
+        
+        globalNotificationWS.onopen = () => {
+          console.log('[FRONTEND] Global notification WebSocket connected');
+          // Authenticate with 'global' role and user's email as sessionId
+          if (window.loggedInEmail) {
+            const authData = {
+              type: 'auth',
+              role: 'client',
+              sessionId: 'global:' + window.loggedInEmail,
+              name: '',
+              email: window.loggedInEmail
+            };
+            console.log('[FRONTEND] Sending auth data:', authData);
+            globalNotificationWS.send(JSON.stringify(authData));
+          } else {
+            console.log('[FRONTEND] No loggedInEmail found, cannot authenticate');
+          }
+        };
+        
+        globalNotificationWS.onmessage = (e) => {
+          const data = JSON.parse(e.data);
+          console.debug('[WS][global] message received:', data);
+          
+          // Show notification for admin messages when not in an active chat
+          if (data.type === 'chat_message' && data.sender === 'admin') {
+            console.debug('[WS][global] received admin message, checking if chat is active');
+            
+            const chatModal = document.getElementById('user-chat-modal');
+            let isInActiveChat = false;
+            if (chatModal) {
+              try {
+                isInActiveChat = window.getComputedStyle(chatModal).display !== 'none';
+                console.debug('[WS][global] chat modal display style:', window.getComputedStyle(chatModal).display);
+              } catch(_) {
+                isInActiveChat = chatModal.style.display !== 'none';
+                console.debug('[WS][global] chat modal display property:', chatModal.style.display);
+              }
+            }
+            
+            console.debug('[WS][global] is in active chat:', isInActiveChat);
+            
+            if (!isInActiveChat) {
+              console.debug('[WS][global] chat hidden → showing toast');
+              showUserToastNotification(data);
+            } else {
+              console.debug('[WS][global] chat visible → skipping toast');
+            }
+          } else {
+            console.debug('[WS][global] message is not an admin chat message, type:', data.type, 'sender:', data.sender);
+          }
+        };
+        
+        globalNotificationWS.onclose = () => {
+          console.log('Global notification WebSocket disconnected');
+          // Attempt to reconnect after 5 seconds if user is still logged in
+          if (window.loggedInEmail) {
+            setTimeout(initGlobalNotifications, 5000);
+          }
+        };
+        
+        globalNotificationWS.onerror = (error) => {
+          console.error('Global notification WebSocket error:', error);
+        };
+      }
+
+      async function openUserChat(bookingId, service) {
+        closeMyBookings();
+        document.getElementById('chat-booking-id').textContent = '#' + bookingId;
+        document.getElementById('user-chat-modal').style.display = 'block';
+        const box = document.getElementById('user-chat-box');
+        box.innerHTML = 'Loading messages...';
+        try {
+          const res = await fetch(getApiUrl(`/api/my-chat/${bookingId}`), { credentials: 'include' });
+          if (!res.ok) throw new Error('Failed to load');
+          const data = await res.json();
+          const msgs = data.messages;
+          box.innerHTML = msgs.map(m => `<div style="${m.sender === 'user' ? 'text-align:right;' : ''}"><strong>${m.senderName || m.sender}:</strong> ${m.content} <small>${new Date(m.timestamp).toLocaleString()}</small></div>`).join('');
+          box.scrollTop = box.scrollHeight;
+        } catch (e) {
+          box.innerHTML = 'Error loading messages';
+        }
+
+        // Connect WS
+        if (userChatWS) userChatWS.close();
+        {
+          const wsUrl = getWSUrl();
+          console.debug('[WS][chat] connecting', { url: wsUrl, bookingId });
+          userChatWS = new WebSocket(wsUrl);
+        }
+        userChatWS.onopen = () => {
+          userChatWS.send(JSON.stringify({
+            type: 'auth',
+            role: 'client',
+            sessionId: bookingId.toString(),
+            name: nameFromEmail(window.loggedInEmail) || 'User',
+            email: window.loggedInEmail || '',
+            service: service
+          }));
+        };
+        userChatWS.onmessage = (e) => {
+          const data = JSON.parse(e.data);
+          if (data.type === 'chat_message' && data.bookingId == bookingId && data.sender === 'admin') {
+            const div = document.createElement('div');
+            div.innerHTML = `<strong>Admin:</strong> ${data.content} <small>${new Date(data.timestamp).toLocaleString()}</small>`;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+            // Fallback notification: only if global WS is not connected
+            if (!globalNotificationWS || globalNotificationWS.readyState !== WebSocket.OPEN) {
+              const chatModal = document.getElementById('user-chat-modal');
+              let isInActiveChat = false;
+              if (chatModal) {
+                try { isInActiveChat = window.getComputedStyle(chatModal).display !== 'none'; } catch(_) { isInActiveChat = chatModal.style.display !== 'none'; }
+              }
+              if (!isInActiveChat) {
+                showUserToastNotification(data);
+              }
+            }
+          }
+        };
+        userChatWS.onclose = () => {
+          console.log('User chat disconnected');
+        };
+      }
+
+      function closeUserChat() {
+        document.getElementById('user-chat-modal').style.display = 'none';
+        if (userChatWS) userChatWS.close();
+      }
+
+      function sendUserMessage() {
+        const input = document.getElementById('user-chat-input');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        const bookingId = document.getElementById('chat-booking-id').textContent.replace('#', '');
+        if (userChatWS && userChatWS.readyState === WebSocket.OPEN) {
+          userChatWS.send(JSON.stringify({
+            type: 'chat_message',
+            bookingId: bookingId,
+            content: text,
+            sender: 'user',
+            timestamp: new Date().toISOString()
+          }));
+          const box = document.getElementById('user-chat-box');
+          const div = document.createElement('div');
+          div.style = 'text-align:right;';
+          div.innerHTML = `<strong>You:</strong> ${text} <small>${new Date().toLocaleString()}</small>`;
+          box.appendChild(div);
+          box.scrollTop = box.scrollHeight;
+        } else {
+          alert('Chat not connected');
+        }
+      }
+
+      // User Toast Notification (reused style from admin)
+      function escapeHtml(text) {
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+        return String(text || '').replace(/[&<>"']/g, m => map[m]);
+      }
+
+      function showUserToastNotification(messageData) {
+        try {
+          console.debug('[toast] showUserToastNotification called with:', messageData);
+          
+          // Additional debug info
+          console.debug('[toast] message content:', messageData?.content);
+          console.debug('[toast] booking ID:', messageData?.bookingId);
+          console.debug('[toast] service:', messageData?.service);
+          
+          // Remove existing toast if any
+          const existing = document.querySelector('.toast-notification');
+          if (existing) {
+            console.debug('[toast] removing existing toast');
+            existing.remove();
+          }
+
+          const bookingId = messageData?.bookingId;
+          const service = messageData?.service || 'Support';
+          const content = messageData?.content || 'New message received';
+          const preview = content.length > 80 ? content.substring(0, 80) + '...' : content;
+
+          console.debug('[toast] creating toast element with preview:', preview);
+          
+          const toast = document.createElement('div');
+          toast.className = 'toast-notification';
+          toast.innerHTML = `
+            <div class="toast-header">
+              <i class="fas fa-envelope toast-icon"></i>
+              New message from Admin
+            </div>
+            <div class="toast-body">
+              "${escapeHtml(preview)}"<br>
+              <small style="color: var(--light-text, #9ca3af);">Click to open chat</small>
+            </div>
+            <div class="toast-actions">
+              <button class="toast-btn js-toast-close">Close</button>
+              <button class="toast-btn primary js-toast-open">Open Chat</button>
+            </div>
+          `;
+
+          // Click anywhere (except Close) opens chat
+          toast.addEventListener('click', (e) => {
+            console.debug('[toast] toast clicked');
+            if (e.target && e.target.classList.contains('js-toast-close')) {
+              console.debug('[toast] close button clicked');
+              return;
+            }
+            if (bookingId) {
+              console.debug('[toast] opening chat with booking ID:', bookingId);
+              openUserChat(bookingId, service);
+            }
+            if (toast.parentElement) toast.remove();
+          });
+
+          // Bind buttons
+          toast.querySelector('.js-toast-close')?.addEventListener('click', (e) => {
+            console.debug('[toast] close button event listener triggered');
+            e.stopPropagation();
+            if (toast.parentElement) toast.remove();
+          });
+          
+          toast.querySelector('.js-toast-open')?.addEventListener('click', (e) => {
+            console.debug('[toast] open button event listener triggered');
+            e.stopPropagation();
+            if (bookingId) openUserChat(bookingId, service);
+            if (toast.parentElement) toast.remove();
+          });
+
+          document.body.appendChild(toast);
+          console.debug('[toast] toast appended to body');
+          
+          setTimeout(() => {
+            console.debug('[toast] adding .show class');
+            toast.classList.add('show');
+          }, 50);
+
+          // Auto-hide after 8 seconds
+          setTimeout(() => {
+            if (toast.parentElement) {
+              console.debug('[toast] auto-hiding toast');
+              toast.classList.remove('show');
+              setTimeout(() => { if (toast.parentElement) toast.remove(); }, 400);
+            }
+          }, 8000);
+        } catch (err) {
+          console.warn('[toast] render failed:', err);
+        }
+      }
+      // Ensure global access
+      window.showUserToastNotification = showUserToastNotification;
+
+      // Admin Notification Functions
+      let currentNotificationBookingId = null;
+
+      function showAdminNotification(message, bookingId, senderName = 'Admin') {
+        const notification = document.getElementById('admin-message-notification');
+        const titleEl = notification.querySelector('.notification-title');
+        const messageEl = notification.querySelector('.notification-message');
+        
+        titleEl.textContent = `Message from ${senderName}`;
+        messageEl.textContent = `"${message}"`;
+        
+        currentNotificationBookingId = bookingId;
+        notification.style.display = 'flex';
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+          if (notification.style.display === 'flex') {
+            closeAdminNotification();
+          }
+        }, 10000);
+      }
+
+      function closeAdminNotification() {
+        const notification = document.getElementById('admin-message-notification');
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+          notification.style.display = 'none';
+          notification.style.animation = '';
+        }, 300);
+      }
+
+      function viewAdminMessages() {
+        closeAdminNotification();
+        if (currentNotificationBookingId) {
+          openUserChat(currentNotificationBookingId, 'Support');
+        } else {
+          // If no specific booking ID, open the bookings modal
+          openMyBookings();
+        }
+      }
+
+      // Test function to trigger admin notification
+      function testAdminNotification() {
+        console.debug('[toast] testAdminNotification clicked');
+        const testMessages = [
+          "Hello! I've reviewed your request and have some questions.",
+          "Your campaign is ready for launch. Please review the settings.",
+          "Great news! Your SEO optimization is showing positive results.",
+          "I've prepared a detailed report for your review.",
+          "Can we schedule a call to discuss your project?"
+        ];
+        
+        const randomMessage = testMessages[Math.floor(Math.random() * testMessages.length)];
+        const randomBookingId = Math.floor(Math.random() * 1000) + 1;
+        
+        const payload = { content: randomMessage, bookingId: randomBookingId, service: 'Support' };
+        console.debug('[toast] invoking showUserToastNotification with:', payload);
+        showUserToastNotification(payload);
+      }
+      // Ensure global access
+      window.testAdminNotification = testAdminNotification;
+    </script>
+    <script src="js/facebook-chat.js"></script>
+    <script src="js/fix-chat.js"></script>
+</body>
+</html>

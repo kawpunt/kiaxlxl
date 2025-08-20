@@ -1,0 +1,20 @@
+<!-- User Settings Modal -->
+<div id="user-settings-modal" class="modal-glass" style="display:none;">
+  <div class="user-settings-content">
+    <button class="auth-close-btn" onclick="document.getElementById('user-settings-modal').style.display='none'">&times;</button>
+    <h2 class="auth-title">Account Settings</h2>
+    <form id="user-settings-form">
+      <label for="settings-email">Email</label>
+      <input id="settings-email" type="email" class="auth-input" disabled>
+      <label for="settings-phone">Phone Number</label>
+      <input id="settings-phone" type="tel" class="auth-input" placeholder="Enter phone number">
+      <label for="settings-password">New Password</label>
+      <input id="settings-password" type="password" class="auth-input" placeholder="New password">
+      <label for="settings-password-confirm">Confirm Password</label>
+      <input id="settings-password-confirm" type="password" class="auth-input" placeholder="Confirm new password">
+      <button type="submit" class="btn-modern btn-gradient auth-submit-btn">Save Changes</button>
+    </form>
+    <div id="settings-message" class="auth-message"></div>
+    <button id="logout-btn" class="btn-modern btn-logout" style="width:100%;margin-top:1.5em;">Logout</button>
+  </div>
+</div>

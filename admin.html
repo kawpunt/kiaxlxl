@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JYS Media</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #B8860B;
+            --success-color: #FFD700;
+            --warning-color: #FFD700;
+            --error-color: #ef4444;
+            --text-color: #ffffff;
+            --light-text: #cccccc;
+            --background: #1a1a1a;
+            --white: #000000;
+            --border-color: #333333;
+            --sidebar-bg: #000000;
+            --card-bg: #2a2a2a;
+            --shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.1), 0 2px 4px -1px rgba(255, 215, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 215, 0, 0.1), 0 10px 10px -5px rgba(255, 215, 0, 0.04);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--background); color: var(--text-color); line-height: 1.6; }
+        .admin-container { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: var(--sidebar-bg); color: white; position: fixed; height: 100vh; overflow-y: auto; z-index: 1000; transition: var(--transition); }
+        .sidebar.collapsed { width: 80px; }
+        .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 12px; }
+        .sidebar-logo { width: 40px; height: 40px; background: var(--primary-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .sidebar-title { font-weight: 700; font-size: 1.25rem; transition: var(--transition); }
+        .sidebar.collapsed .sidebar-title { opacity: 0; width: 0; }
+        .sidebar-nav { padding: 1rem 0; }
+        .nav-item { margin: 0.5rem 0; }
+        .nav-link { display: flex; align-items: center; padding: 0.75rem 1.5rem; color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); gap: 12px; }
+        .nav-link:hover, .nav-link.active { background: rgba(255, 215, 0, 0.08); color: white; border-right: 3px solid var(--primary-color); }
+        .nav-link i { font-size: 1.25rem; width: 20px; }
+        .nav-text { transition: var(--transition); }
+        .sidebar.collapsed .nav-text { opacity: 0; width: 0; }
+
+        /* Main Content */
+        .main-content { flex: 1; margin-left: 280px; transition: var(--transition); padding: 2rem; }
+        .sidebar.collapsed ~ .main-content { margin-left: 80px; }
+
+        /* Header */
+        .admin-header { background: var(--card-bg); padding: 1rem 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); }
+        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .sidebar-toggle { background: none; border: none; font-size: 1.25rem; color: var(--text-color); cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: var(--transition); }
+        .sidebar-toggle:hover { background: var(--card-bg); }
+        .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text-color); }
+        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .user-info { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; border-radius: 50px; background: var(--card-bg); border: 1px solid var(--border-color); }
+        .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; color: #000000; font-weight: 600; }
+        .logout-btn { background: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 500; transition: var(--transition); }
+        .logout-btn:hover { background: #dc2626; transform: translateY(-1px); }
+
+        /* Table Styles */
+        .table-container { background: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border-color); }
+        .table-header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .table-title { font-size: 1.25rem; font-weight: 700; color: var(--text-color); }
+        .table-actions { display: flex; gap: 1rem; }
+        .btn { padding: 0.5rem 1rem; border-radius: 8px; border: none; font-weight: 500; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-primary { background: var(--primary-color); color: #000000; border: 1px solid var(--primary-color); }
+        .btn-primary:hover { background: var(--secondary-color); color: #ffffff; transform: translateY(-1px); }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .data-table th { background: var(--background); font-weight: 600; color: var(--primary-color); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { color: var(--text-color); }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-new { background: rgba(255, 215, 0, 0.2); color: var(--primary-color); }
+        .status-contacted { background: rgba(184, 134, 11, 0.2); color: var(--secondary-color); }
+        .status-converted { background: rgba(255, 215, 0, 0.3); color: var(--primary-color); }
+        .status-closed { background: rgba(255, 255, 255, 0.1); color: var(--light-text); }
+        .status-active { background: rgba(255, 215, 0, 0.2); color: var(--primary-color); }
+
+        /* Loading */
+        .loading { display: flex; align-items: center; justify-content: center; padding: 2rem; color: var(--light-text); }
+        .spinner { width: 24px; height: 24px; border: 2px solid var(--border-color); border-top: 2px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 0.5rem; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Alerts */
+        .alert { padding: 1rem 1.5rem; border-radius: var(--border-radius); margin-bottom: 1rem; display: none; }
+        .alert-success { background: rgba(255, 215, 0, 0.1); border: 1px solid var(--primary-color); color: var(--primary-color); }
+        .alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--error-color); color: var(--error-color); }
+
+        /* Chat */
+        .chat-message { display: flex; flex-direction: column; max-width: 80%; margin-bottom: 12px; position: relative; animation: fadeIn 0.3s ease; }
+        .chat-message.admin { align-self: flex-end; margin-left: auto; text-align: right; }
+        .chat-message.user { align-self: flex-start; margin-right: auto; }
+        .message-bubble { padding: 10px 14px; border-radius: 12px; position: relative; word-break: break-word; }
+        .chat-message.admin .message-bubble { background: var(--primary-color); color: #000000; border-bottom-right-radius: 4px; }
+        .chat-message.user .message-bubble { background: var(--card-bg); color: var(--text-color); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
+        .message-meta { display: flex; margin-top: 4px; font-size: 11px; color: var(--light-text); justify-content: flex-end; }
+        .chat-message.user .message-meta { justify-content: flex-start; }
+        .message-time { margin-right: 5px; }
+        .message-sender { font-weight: 500; }
+        .message-status { font-size: 10px; margin-left: 5px; }
+        .message-status.sent { color: var(--success-color); }
+        .message-status.error { color: var(--error-color); }
+        .message-status.pending { color: var(--warning-color); }
+        .session-row { position: relative; cursor: pointer; transition: background-color 0.2s ease; }
+        .session-row:hover { background-color: rgba(255, 215, 0, 0.05); }
+        .session-row.active-session { background-color: rgba(255, 215, 0, 0.1); }
+        .session-row:after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: transparent; transition: background 0.2s ease; }
+        .session-row.active-session:after { background: var(--primary-color); }
+        .session-row:hover:after { background: var(--secondary-color); }
+        .empty-chat-message { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--light-text); text-align: center; padding: 20px; }
+        .empty-chat-message i { font-size: 48px; margin-bottom: 15px; color: var(--border-color); }
+        .btn-small { padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; background: var(--primary-color); color: #000000; border: none; transition: var(--transition); }
+        .btn-small:hover { background: var(--secondary-color); color: #ffffff; }
+        .connection-status { display: inline-block; padding: 3px 8px; border-radius: 10px; font-size: 12px; margin-left: 10px; }
+        .connection-status.connected { background: var(--primary-color); color: #000000; }
+        .connection-status.disconnected { background: var(--error-color); color: #ffffff; }
+        
+        /* Notification Badge */
+        .notification-badge {
+            background: var(--error-color) !important;
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            padding: 2px 6px !important;
+            font-size: 10px !important;
+            font-weight: 700 !important;
+            position: absolute !important;
+            top: -5px !important;
+            right: -10px !important;
+            min-width: 16px !important;
+            height: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            animation: pulse 2s infinite !important;
+        }
+        
+        .nav-link {
+            position: relative !important;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Toast Notification Popup */
+        .toast-notification {
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+            border: 2px solid var(--primary-color) !important;
+            border-radius: 12px !important;
+            padding: 16px 20px !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.1) !important;
+            z-index: 10000 !important;
+            min-width: 300px !important;
+            max-width: 400px !important;
+            transform: translateX(120%) !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            backdrop-filter: blur(10px) !important;
+            animation: toastGlow 2s ease-in-out infinite alternate !important;
+        }
+        
+        .toast-notification.show {
+            transform: translateX(0) !important;
+        }
+        
+        .toast-notification .toast-header {
+            display: flex !important;
+            align-items: center !important;
+            margin-bottom: 8px !important;
+            font-weight: 700 !important;
+            font-size: 16px !important;
+            color: var(--primary-color) !important;
+        }
+        
+        .toast-notification .toast-icon {
+            font-size: 20px !important;
+            margin-right: 10px !important;
+            color: var(--primary-color) !important;
+            animation: bounce 1s ease-in-out infinite !important;
+        }
+        
+        .toast-notification .toast-body {
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 12px !important;
+        }
+        
+        .toast-notification .toast-actions {
+            display: flex !important;
+            gap: 10px !important;
+            justify-content: flex-end !important;
+        }
+        
+        .toast-btn {
+            padding: 6px 12px !important;
+            border: 1px solid var(--primary-color) !important;
+            background: transparent !important;
+            color: var(--primary-color) !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .toast-btn:hover {
+            background: var(--primary-color) !important;
+            color: #000000 !important;
+            transform: translateY(-1px) !important;
+        }
+        
+        .toast-btn.primary {
+            background: var(--primary-color) !important;
+            color: #000000 !important;
+        }
+        
+        .toast-btn.primary:hover {
+            background: var(--secondary-color) !important;
+            color: #ffffff !important;
+        }
+        
+        @keyframes toastGlow {
+            0% { box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.1); }
+            100% { box-shadow: 0 8px 32px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.2); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseTyping { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+        .typing-indicator { animation: pulseTyping 1.5s infinite; }
+        .quick-response-item:hover { background-color: rgba(255, 215, 0, 0.1); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 1rem; }
+            .admin-header { padding: 1rem; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">JM</div>
+                <div class="sidebar-title">JYS Media</div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item"><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-chart-pie"></i><span class="nav-text">Dashboard</span></a></div>
+                <div class="nav-item"><a href="#" class="nav-link" data-section="contacts"><i class="fas fa-envelope"></i><span class="nav-text">Contacts</span></a></div>
+                <div class="nav-item"><a href="#" class="nav-link" data-section="users"><i class="fas fa-users"></i><span class="nav-text">Users</span></a></div>
+                <div class="nav-item"><a href="#" class="nav-link" data-section="inbox"><i class="fas fa-comments"></i><span class="nav-text">Inbox</span><span id="message-notification" class="notification-badge" style="display:none;">0</span></a></div>
+                <div class="nav-item"><a href="#" class="nav-link" data-section="analytics"><i class="fas fa-chart-bar"></i><span class="nav-text">Analytics</span></a></div>
+                <div class="nav-item"><a href="#" class="nav-link" data-section="settings"><i class="fas fa-cog"></i><span class="nav-text">Settings</span></a></div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">A</div>
+                        <span id="userName">Admin User</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+
+            <!-- Dashboard -->
+            <div id="dashboardSection" class="content-section">
+                <h2>Dashboard</h2>
+                <p>Welcome to the admin dashboard!</p>
+            </div>
+
+            <!-- Contacts -->
+            <div id="contactsSection" class="content-section" style="display:none;">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2 class="table-title">Contacts</h2>
+                        <div class="table-actions">
+                            <input type="text" id="contactsSearch" placeholder="Search name/email" style="padding:.5rem;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:var(--text-color);">
+                            <button class="btn btn-primary" onclick="window.loadContacts()"><i class="fas fa-refresh"></i> Refresh</button>
+                        </div>
+                    </div>
+                    <div id="contactsTableWrap">
+                        <table class="data-table">
+                            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Message</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+                            <tbody id="contactsTableBody"><tr><td colspan="8" style="padding:1rem 1.5rem;">No data</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users -->
+            <div id="usersSection" class="content-section" style="display:none;">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2 class="table-title">Users</h2>
+                        <div class="table-actions">
+                            <input type="text" id="usersSearch" placeholder="Search name/email" style="padding:.5rem;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:var(--text-color);">
+                            <button class="btn btn-primary" onclick="window.openAddUserModal()"><i class="fas fa-user-plus"></i> Add User</button>
+                            <button class="btn" onclick="window.loadUsers()" style="background:var(--card-bg);color:var(--text-color);border:1px solid var(--border-color);"><i class="fas fa-refresh"></i> Reload</button>
+                        </div>
+                    </div>
+                    <div id="usersTableWrap">
+                        <table class="data-table">
+                            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+                            <tbody id="usersTableBody"><tr><td colspan="6" style="padding:1rem 1.5rem;">No users</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- User Modal -->
+                <div id="userModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:2000; align-items:center; justify-content:center;">
+                    <div style="background:var(--card-bg); width:520px; max-width:95%; border-radius:12px; box-shadow:var(--shadow-lg); overflow:hidden; border:1px solid var(--border-color);">
+                        <div style="padding:1rem 1.25rem; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
+                            <h3 id="userModalTitle" style="margin:0;">Add User</h3>
+                            <button onclick="window.closeUserModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button>
+                        </div>
+                        <form id="userForm" onsubmit="window.saveUser(event)">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; padding:1rem 1.25rem;">
+                                <input type="hidden" id="userId">
+                                <div class="field"><label>Name</label><input id="userNameInput" type="text" placeholder="Full name" required style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--background); color:var(--text-color);"></div>
+                                <div class="field"><label>Email</label><input id="userEmailInput" type="email" placeholder="Email" required style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--background); color:var(--text-color);"></div>
+                                <div class="field"><label>Role</label>
+                                    <select id="userRoleInput" required style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--background); color:var(--text-color);">
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="field"><label>Password <span id="passwordHint" style="color:#9ca3af; font-weight:400; font-size:.85em;">(required for new user)</span></label>
+                                    <input id="userPasswordInput" type="password" placeholder="Set password" style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--background); color:var(--text-color);">
+                                </div>
+                                <div class="field" style="grid-column:1/-1;"><label>Status</label>
+                                    <select id="userStatusInput" required style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--background); color:var(--text-color);">
+                                        <option value="active">Active</option>
+                                        <option value="disabled">Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="padding:1rem 1.25rem; border-top:1px solid var(--border-color); display:flex; justify-content:flex-end; gap:.75rem;">
+                                <button type="button" class="btn" onclick="window.closeUserModal()" style="background:var(--card-bg); color:var(--text-color); border:1px solid var(--border-color);">Cancel</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inbox -->
+            <div id="inboxSection" class="content-section" style="display:none;">
+                <div class="table-container" style="margin-bottom:1rem;">
+                    <div class="table-header">
+                        <h2 class="table-title">Conversations <span id="unread-count" style="color:var(--primary-color);font-size:0.9rem;display:none;">(Alert: <span id="unread-number">0</span> new messages)</span></h2>
+                        <div class="table-actions">
+                            <span id="auto-refresh-indicator" style="color:#10b981;font-size:.9rem;margin-right:1rem;display:none;"><i class="fas fa-sync fa-spin"></i> Auto-refreshing...</span>
+                            <button class="btn btn-primary" onclick="window.chatSystem.loadSessions()"><i class="fas fa-refresh"></i> Refresh</button>
+                        </div>
+                    </div>
+                    <div id="sessionsList" style="max-height:260px; overflow:auto; border-top:1px solid var(--border-color);"></div>
+                </div>
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="chat-header-info"><h2 class="table-title">Chat</h2><div id="current-chat-user" style="font-size:.9rem;color:var(--light-text);margin-left:10px;"></div></div>
+                        <div class="chat-status"><span class="connection-status">Status</span></div>
+                    </div>
+                    <div id="chatBox" style="height:380px; overflow:auto; padding:1rem; background:#f8fafc;"></div>
+                    <div class="chat-input-container" style="display:flex; gap:.5rem; padding:1rem; border-top:1px solid var(--border-color); background:#fff; position:relative;">
+                        <div class="typing-indicator" id="typing-indicator" style="display:none; position:absolute; bottom:60px; left:20px; font-size:12px; color:var(--light-text); background:rgba(255,255,255,0.8); padding:3px 8px; border-radius:10px;">
+                            <i class="fas fa-keyboard"></i> User is typing...
+                        </div>
+                        <textarea id="chatInput" placeholder="Select a conversation..." style="flex:1; padding:.75rem 1rem; border:1px solid var(--border-color); border-radius:10px; resize:none; min-height:40px; max-height:120px;" disabled></textarea>
+                        <div style="display:flex; flex-direction:column; gap:5px;">
+                            <button class="btn btn-primary" id="sendAdminMessageBtn" style="height:40px;"><i class="fas fa-paper-plane"></i> Send</button>
+                            <button class="btn" id="quickResponseBtn" title="Quick Responses" style="height:40px; background:#f3f4f6; color:var(--text-color);"><i class="fas fa-bolt"></i></button>
+                        </div>
+                    </div>
+                    <div id="quick-responses" style="display:none; position:absolute; bottom:70px; right:20px; width:250px; background:white; border-radius:10px; box-shadow:var(--shadow); z-index:10; border:1px solid var(--border-color)">
+                        <div style="padding:10px; border-bottom:1px solid var(--border-color); font-weight:600;">Quick Responses</div>
+                        <div style="max-height:200px; overflow-y:auto;">
+                            <div class="quick-response-item" style="padding:8px 10px; cursor:pointer; transition:all 0.2s; border-bottom:1px solid #f1f1f1;" onclick="window.chatSystem.insertQuickResponse('Thank you for reaching out. How can I assist you today?')">Thank you for reaching out</div>
+                            <div class="quick-response-item" style="padding:8px 10px; cursor:pointer; transition:all 0.2s; border-bottom:1px solid #f1f1f1;" onclick="window.chatSystem.insertQuickResponse('I\'ll check this and get back to you shortly.')">I'll check and get back</div>
+                            <div class="quick-response-item" style="padding:8px 10px; cursor:pointer; transition:all 0.2s; border-bottom:1px solid #f1f1f1;" onclick="window.chatSystem.insertQuickResponse('Could you please provide more details about your issue?')">Request more details</div>
+                            <div class="quick-response-item" style="padding:8px 10px; cursor:pointer; transition:all 0.2s; border-bottom:1px solid #f1f1f1;" onclick="window.chatSystem.insertQuickResponse('We\'ve resolved your issue. Please let us know if you need anything else.')">Issue resolved</div>
+                            <div class="quick-response-item" style="padding:8px 10px; cursor:pointer; transition:all 0.2s;" onclick="window.chatSystem.insertQuickResponse('Thank you for your patience. Our team is working on your request.')">Thanks for patience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics -->
+            <div id="analyticsSection" class="content-section" style="display:none;">
+                <div class="table-container" style="margin-bottom:1rem;">
+                    <div class="table-header">
+                        <h2 class="table-title">Analytics & Reports</h2>
+                        <div class="table-actions"><button class="btn" onclick="window.loadAnalytics()" style="background:#eef2ff;color:#111;"><i class="fas fa-refresh"></i> Reload</button></div>
+                    </div>
+                    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; padding:1rem;">
+                        <div style="background:#ff0000; border:1px solid var(--border-color); border-radius:12px; padding:1rem;"><div style="font-size:.85rem; color:#6b7280;">Bookings (7d)</div><div id="kpiBookings" style="font-size:1.6rem; font-weight:800;">0</div></div>
+                        <div style="background:#fff; border:1px solid var(--border-color); border-radius:12px; padding:1rem;"><div style="font-size:.85rem; color:#6b7280;">Messages (7d)</div><div id="kpiMessages" style="font-size:1.6rem; font-weight:800;">0</div></div>
+                        <div style="background:#fff; border:1px solid var(--border-color); border-radius:12px; padding:1rem;"><div style="font-size:.85rem; color:#6b7280;">New Users (7d)</div><div id="kpiUsers" style="font-size:1.6rem; font-weight:800;">0</div></div>
+                        <div style="background:#fff; border:1px solid var(--border-color); border-radius:12px; padding:1rem;"><div style="font-size:.85rem; color:#6b7280;">Conversion</div><div id="kpiConversion" style="font-size:1.6rem; font-weight:800;">0%</div></div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="table-header"><h2 class="table-title">Activity (Last 7 days)</h2></div>
+                    <div style="padding:1rem; background:#fff;"><canvas id="analyticsChart" height="120"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div id="settingsSection" class="content-section" style="display:none;">
+                <div class="table-container">
+                    <div class="table-header"><h2 class="table-title">System Settings</h2></div>
+                    <div style="padding:1rem; background:#fff;">
+                        <form id="settingsForm" onsubmit="window.saveSettings(event)" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                            <div><label>Site Name</label><input id="setSiteName" type="text" placeholder="JYS Media Admin" style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px;"></div>
+                            <div><label>Primary Color</label><input id="setPrimaryColor" type="color" value="#FFD700" style="width:100%; padding:.3rem; height:42px; border:1px solid var(--border-color); border-radius:8px;"></div>
+                            <div><label>Enable Auto-refresh (Inbox)</label><select id="setAutoRefresh" style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px;"><option value="on">On</option><option value="off">Off</option></select></div>
+                            <div><label>Chat Retention (days)</label><input id="setRetention" type="number" min="1" max="365" value="30" style="width:100%; padding:.65rem; border:1px solid var(--border-color); border-radius:8px;"></div>
+                            <div style="grid-column:1/-1; display:flex; justify-content:flex-end; gap:.75rem;"><button type="button" class="btn" onclick="window.loadSettings()" style="background:#000000;">Reset</button><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Settings</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      // Alert helper
+      function showAlert(message, type){
+        type = type || 'error';
+        const el = document.getElementById(type === 'error' ? 'errorAlert' : 'successAlert');
+        const other = document.getElementById(type === 'error' ? 'successAlert' : 'errorAlert');
+        if (other) other.style.display = 'none';
+        if (el){ el.textContent = message; el.style.display = 'block'; setTimeout(()=>{el.style.display='none';}, 5000); }
+      }
+
+      // Chat system (unchanged logic)
+      window.chatSystem = {
+        ws: null, activeChats: new Map(), currentSessionId: null, unreadCount: 0, connected: false,
+        reconnectAttempts: 0, maxReconnectAttempts: 10, reconnectInterval: 3000, autoRefreshInterval: null, autoRefreshDelay: 5000,
+        init: function(){
+          if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) return;
+          const wsUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + (location.host || 'localhost:4000');
+          this.ws = new WebSocket(wsUrl);
+          this.ws.onopen = () => {
+            this.connected = true; this.reconnectAttempts = 0; this.authenticate();
+            document.querySelectorAll('.connection-status').forEach(el=>{ el.classList.remove('disconnected'); el.classList.add('connected'); el.textContent='Connected'; });
+            if (document.getElementById('inboxSection').style.display !== 'none') { this.loadSessions(); this.startAutoRefresh(); }
+          };
+          this.ws.onclose = () => {
+            this.connected = false; document.querySelectorAll('.connection-status').forEach(el=>{ el.classList.remove('connected'); el.classList.add('disconnected'); el.textContent='Disconnected'; });
+            const chatInput = document.getElementById('chatInput'); if (chatInput){ chatInput.disabled = true; chatInput.placeholder = 'Reconnecting...'; }
+            this.stopAutoRefresh(); this.reconnect();
+          };
+          this.ws.onerror = () => { showAlert('Connection error. Trying to reconnect...', 'error'); };
+          this.ws.onmessage = (event) => {
+            try { 
+              const data = JSON.parse(event.data); 
+              console.log('WebSocket message received:', data);
+              switch(data.type){
+                case 'new_booking': this.handleNewBooking(data.booking); if (document.getElementById('inboxSection').style.display !== 'none') setTimeout(()=>this.loadSessions(true), 1000); break;
+                case 'chat_message': 
+                  this.handleChatMessage(data); 
+                  if(data.sender !== 'admin') this.showNewMessageNotification(data); 
+                  break;
+                case 'booking_status': this.updateBookingStatus(data); break;
+                case 'typing_indicator': this.handleTypingIndicator(data); break;
+                case 'message_status': this.updateMessageStatus(data); break;
+                case 'auth_success': break;
+                case 'auth_error': showAlert('Authentication failed: ' + data.message, 'error'); break;
+                default:
+                  console.log('Unknown message type:', data.type);
+              }
+            } catch(e){
+              console.error('Error parsing WebSocket message:', e);
+            }
+          };
+        },
+        authenticate: async function(){ try{ const r=await fetch('/api/check',{credentials:'include'}); const d=await r.json(); if (d.loggedIn && this.ws && this.ws.readyState===WebSocket.OPEN){ this.ws.send(JSON.stringify({type:'auth', userId:d.userId, role:'admin'})); } }catch(_){}}
+        ,reconnect: function(){ if (this.reconnectAttempts < this.maxReconnectAttempts){ this.reconnectAttempts++; document.querySelectorAll('.connection-status').forEach(el=>{ el.textContent = `Reconnecting (${this.reconnectAttempts}/${this.maxReconnectAttempts})...`; }); setTimeout(()=>this.init(), this.reconnectInterval*this.reconnectAttempts); } else { showAlert('Connection lost. Please refresh the page.','error'); } }
+        ,sendMessage: function(data){ if (!this.ws || this.ws.readyState !== WebSocket.OPEN){ showAlert('Connection error. Please try again.','error'); return false; } try{ this.ws.send(JSON.stringify(data)); return true; }catch(_){ showAlert('Failed to send message','error'); return false; } }
+        ,loadSessions: async function(silent){ try{ const wrap=document.getElementById('sessionsList'); if(!silent){ wrap.innerHTML='<div class="loading"><div class="spinner"></div>Loading sessions...</div>'; } const r=await fetch('/api/support/sessions'); const d=await r.json(); const sessions=d.sessions||[]; if(!sessions.length){ wrap.innerHTML='<div class="loading">No active support sessions</div>'; return; } const html=`<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead><tbody>${sessions.map(s=>`<tr data-session-id="${s.id}" class="session-row ${this.currentSessionId===s.id?'active-session':''}"><td>${s.name||s.email||'Anonymous'}</td><td>${s.email||'N/A'}</td><td><span class="status-badge status-${s.status||'active'}">${s.status||'active'}</span></td><td>${new Date(s.updated_at||s.created_at).toLocaleString()}</td><td><button class="btn-small" onclick="window.chatSystem.openSession('${s.id}')"><i class="fas fa-comments"></i> Open</button></td></tr>`).join('')}</tbody></table>`; wrap.innerHTML=html; document.querySelectorAll('.session-row').forEach(row=>row.addEventListener('click',()=>this.openSession(row.getAttribute('data-session-id')))); }catch(_){ document.getElementById('sessionsList').innerHTML='<div class="loading">Failed to load sessions</div>'; } }
+        ,openSession: async function(id){ this.currentSessionId=id; const box=document.getElementById('chatBox'); box.innerHTML='<div class="loading"><div class="spinner"></div> Loading messages...</div>'; document.querySelectorAll('.session-row').forEach(r=>{ r.classList.toggle('active-session', r.getAttribute('data-session-id')===id); }); try{ const r=await fetch(`/api/support/sessions/${id}`); const d=await r.json(); const msgs=d.session?.messages||[]; if(!msgs.length){ box.innerHTML='<div class="empty-chat-message">No messages in this conversation yet.</div>'; } else { box.innerHTML=msgs.map(m=>{ const isAdmin=m.sender==='admin'; return `<div class="chat-message ${isAdmin?'admin':'user'}"><div class="message-bubble">${this.escapeHtml(m.text)}</div><div class="message-meta"><span class="message-time">${new Date(m.timestamp).toLocaleTimeString()}</span><span class="message-sender">${isAdmin?'You':(d.session.name||'User')}</span></div></div>`; }).join(''); } const input=document.getElementById('chatInput'); if(input){ input.disabled=false; input.placeholder='Type your message...'; input.focus(); } const userEl=document.getElementById('current-chat-user'); if(userEl){ userEl.textContent=`Chatting with ${d.session.name||d.session.email||'User'}`; } box.scrollTop=box.scrollHeight; }catch(_){ box.innerHTML=`<div class="loading error">Failed to load messages. <button onclick="window.chatSystem.openSession('${id}')">Retry</button></div>`; } }
+        ,sendAdminMessage: function(){ const input=document.getElementById('chatInput'); const text=(input.value||'').trim(); if(!text||!this.currentSessionId){ showAlert('Please select a conversation first or enter a message','error'); return; } input.value=''; input.disabled=true; try{ if(this.ws && this.ws.readyState===WebSocket.OPEN){ this.ws.send(JSON.stringify({ type:'chat_message', sessionId:this.currentSessionId, bookingId:this.currentSessionId, content:text, sender:'admin', timestamp:new Date().toISOString() })); const box=document.getElementById('chatBox'); const el=document.createElement('div'); el.className='chat-message admin'; el.innerHTML=`<div class="message-bubble">${this.escapeHtml(text)}</div><div class="message-meta"><span class="message-time">${new Date().toLocaleTimeString()}</span><span class="message-sender">You</span><span class="message-status pending">Sending...</span></div>`; box.appendChild(el); box.scrollTop=box.scrollHeight; showAlert('Message sent successfully','success'); } else { throw new Error('WS not connected'); } }catch(_){ showAlert('Failed to send message. Please try again.','error'); input.value=text; } finally{ input.disabled=false; input.focus(); } }
+        ,escapeHtml: function(t){ const m={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#039;'}; return String(t||'').replace(/[&<>"']/g, ch=>m[ch]); }
+        ,insertQuickResponse: function(t){ const i=document.getElementById('chatInput'); if(i){ i.value=t; i.focus(); } document.getElementById('quick-responses').style.display='none'; }
+        ,showNewMessageNotification: function(messageData){
+            // Fetch updated unread count from backend
+            this.fetchUnreadCount();
+            
+            // Show toast popup notification with user info
+            this.showToastNotification(messageData);
+            
+            // Show browser notification if permission granted
+            if(Notification.permission === 'granted'){
+                const userEmail = messageData?.email || messageData?.name || 'User';
+                new Notification(`New message from ${userEmail}`, {
+                    body: messageData?.content || 'You have a new message',
+                    icon: '/images/logo.svg'
+                });
+            }
+        }
+        ,showToastNotification: function(messageData){
+            // Remove existing toast if any
+            const existingToast = document.querySelector('.toast-notification');
+            if(existingToast) {
+                existingToast.remove();
+            }
+            
+            // Get user info from message data
+            const userEmail = messageData?.email || messageData?.name || 'User';
+            const messagePreview = messageData?.content ? 
+                (messageData.content.length > 50 ? messageData.content.substring(0, 50) + '...' : messageData.content) : 
+                'New message received';
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <i class="fas fa-envelope toast-icon"></i>
+                    Message from ${this.escapeHtml(userEmail)}
+                </div>
+                <div class="toast-body">
+                    "${this.escapeHtml(messagePreview)}"<br>
+                    <small style="color: var(--light-text);">Click to view conversation</small>
+                </div>
+                <div class="toast-actions">
+                    <button class="toast-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+                    <button class="toast-btn primary" onclick="window.chatSystem.openInbox(); this.parentElement.parentElement.remove();">View Messages</button>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(toast);
+            
+            // Show with animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if(toast.parentElement) {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        if(toast.parentElement) {
+                            toast.remove();
+                        }
+                    }, 400);
+                }
+            }, 8000);
+        }
+        ,openInbox: function(){
+            // Switch to inbox section
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('inboxSection').style.display = 'block';
+            
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector('[data-section="inbox"]').classList.add('active');
+            
+            // Clear notifications
+            this.clearNotifications();
+        }
+        ,clearNotifications: function(){
+            const badge = document.getElementById('message-notification');
+            const unreadCount = document.getElementById('unread-count');
+            
+            this.unreadCount = 0;
+            
+            if(badge){
+                badge.style.display = 'none';
+                badge.textContent = '0';
+            }
+            
+            if(unreadCount){
+                unreadCount.style.display = 'none';
+            }
+        }
+        ,setupQuickResponses: function(){ const btn=document.getElementById('quickResponseBtn'); const wrap=document.getElementById('quick-responses'); if(btn&&wrap){ btn.addEventListener('click',()=>{ wrap.style.display = wrap.style.display==='block'?'none':'block'; }); document.addEventListener('click',(e)=>{ if(!btn.contains(e.target)&&!wrap.contains(e.target)){ wrap.style.display='none'; } }); } }
+        ,startAutoRefresh: function(){ if(this.autoRefreshInterval) clearInterval(this.autoRefreshInterval); this.autoRefreshInterval=setInterval(()=>{ if(document.getElementById('inboxSection').style.display!=='none'){ const ind=document.getElementById('auto-refresh-indicator'); if(ind){ ind.style.display='inline-block'; setTimeout(()=>{ ind.style.display='none'; },1000); } this.loadSessions(true); } }, this.autoRefreshDelay); }
+        ,stopAutoRefresh: function(){ if(this.autoRefreshInterval){ clearInterval(this.autoRefreshInterval); this.autoRefreshInterval=null; } }
+        ,fetchUnreadCount: function(){ 
+            fetch('/api/messages/unread/count', { credentials: 'include' })
+                .then(r => r.json())
+                .then(d => {
+                    if(d.count !== undefined) {
+                        this.unreadCount = d.count;
+                        const badge = document.getElementById('message-notification');
+                        if(badge){
+                            badge.textContent = this.unreadCount;
+                            badge.style.display = this.unreadCount > 0 ? 'flex' : 'none';
+                        }
+                    }
+                })
+                .catch(e => console.warn('Failed to fetch unread count:', e));
+        }
+        ,handleNewBooking: function(booking){ showAlert(`New booking from ${booking.name} for ${booking.service}`,'success'); this.updateUnreadCount(1); this.showNewMessageNotification(); if(booking.message){ this.openSession(booking.id); } if (document.getElementById('inboxSection').style.display !== 'none') setTimeout(()=>this.loadSessions(true), 1000); }
+        ,handleChatMessage: function(data){ const { bookingId, content, sender, timestamp }=data; 
+            // Only render message in open chat; notifications are handled in onmessage switch
+            if(this.currentSessionId===bookingId){ const box=document.getElementById('chatBox'); if(box && sender!=='admin'){ const el=document.createElement('div'); el.className='chat-message user'; el.innerHTML=`<div class="message-bubble">${this.escapeHtml(content)}</div><div class="message-meta"><span class="message-time">${new Date(timestamp||Date.now()).toLocaleTimeString()}</span><span class="message-sender">${data.name||'User'}</span></div></div>`; box.appendChild(el); box.scrollTop=box.scrollHeight; } } 
+            // Update unread count for new user messages
+            if(sender !== 'admin') {
+                this.updateUnreadCount(1);
+            }
+        }
+        ,updateBookingStatus: function(_d){}
+        ,appendMessage: function(_c,_t){}
+        ,updateUnreadCount: function(i){ 
+            this.unreadCount = Math.max(0, (this.unreadCount || 0) + i);
+            const badge = document.getElementById('message-notification');
+            if(badge){
+                badge.textContent = this.unreadCount;
+                badge.style.display = this.unreadCount > 0 ? 'flex' : 'none';
+            }
+        }
+        ,handleTypingIndicator: function(d){ if(d.sessionId!==this.currentSessionId) return; const ind=document.getElementById('typing-indicator'); if(!ind) return; if(d.isTyping){ ind.style.display='block'; clearTimeout(this.typingTimeout); this.typingTimeout=setTimeout(()=>{ ind.style.display='none'; },5000); } else { ind.style.display='none'; } }
+      };
+
+      // Auth check
+      let currentUser=null;
+      window.addEventListener('load', async function(){
+        try{
+          const check=await fetch('/api/check',{credentials:'include'}); const chk=await check.json();
+          if(check.ok && chk.loggedIn){ const admin=await fetch('/api/admin/check',{credentials:'include'}); if(admin.ok){ const ad=await admin.json(); if(ad.isAdmin){ currentUser=chk.user||{email:ad.email}; document.getElementById('userName').textContent=(currentUser.email||'').split('@')[0]; document.getElementById('userAvatar').textContent=(currentUser.email||'A').charAt(0).toUpperCase(); 
+          // Fetch initial unread count
+          window.chatSystem.fetchUnreadCount();
+          // Initialize WebSocket connection
+          window.chatSystem.init();
+          return; } } }
+          showAlert('Access denied. Admin privileges required.','error'); setTimeout(()=>{ window.location.href='/login'; },1500);
+        }catch(e){
+          console.error('Auth check failed:',e);
+          showAlert('Authentication error. Redirecting to login...','error'); setTimeout(()=>{ window.location.href='/login'; },1500);
+        }
+      });
+
+      // Logout
+      document.getElementById('logoutBtn').addEventListener('click', async ()=>{ try{ const r=await fetch('/api/logout',{method:'POST',credentials:'include'}); if(r.ok){ localStorage.removeItem('userEmail'); sessionStorage.removeItem('userEmail'); window.location.href='/login'; } else { showAlert('Failed to logout. Please try again.','error'); } }catch(_){ showAlert('An error occurred during logout.','error'); } });
+
+      // Sidebar toggle
+      document.getElementById('sidebarToggle').addEventListener('click', ()=>{ document.getElementById('sidebar').classList.toggle('collapsed'); });
+
+      // Navigation
+      document.querySelectorAll('.nav-link').forEach(link=>{ link.addEventListener('click', (e)=>{ e.preventDefault(); document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active')); link.classList.add('active'); const section=link.dataset.section; showSection(section); }); });
+
+      function showSection(name){ document.querySelectorAll('.content-section').forEach(s=>s.style.display='none'); document.getElementById(name+'Section').style.display='block'; const titles={dashboard:'Dashboard',contacts:'Contacts',users:'Users',inbox:'Inbox',analytics:'Analytics',settings:'Settings'}; document.getElementById('pageTitle').textContent=titles[name]; switch(name){ case 'dashboard': if(window.chatSystem) window.chatSystem.stopAutoRefresh(); if(typeof window.loadDashboard==='function') window.loadDashboard(); break; case 'contacts': if(window.chatSystem) window.chatSystem.stopAutoRefresh(); window.loadContacts(); break; case 'users': if(window.chatSystem) window.chatSystem.stopAutoRefresh(); window.loadUsers(); break; case 'analytics': if(window.chatSystem) window.chatSystem.stopAutoRefresh(); window.loadAnalytics(); break; case 'settings': if(window.chatSystem) window.chatSystem.stopAutoRefresh(); window.loadSettings(); break; case 'inbox': if(window.chatSystem && (!window.chatSystem.ws || window.chatSystem.ws.readyState!==WebSocket.OPEN)){ window.chatSystem.init(); setTimeout(()=>{ window.chatSystem.loadSessions(); window.chatSystem.startAutoRefresh(); },500); } else { window.chatSystem.loadSessions(); window.chatSystem.startAutoRefresh(); } break; } }
+
+      // Chat UI events
+      document.addEventListener('DOMContentLoaded', ()=>{
+        const sendBtn=document.getElementById('sendAdminMessageBtn'); const input=document.getElementById('chatInput');
+        if(sendBtn){ sendBtn.addEventListener('click', ()=>window.chatSystem.sendAdminMessage()); }
+        if(input){ input.addEventListener('keypress', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); window.chatSystem.sendAdminMessage(); } }); let typingTimer, isTyping=false; input.addEventListener('input', ()=>{ if(!isTyping && window.chatSystem.currentSessionId){ isTyping=true; if(window.chatSystem.ws && window.chatSystem.ws.readyState===WebSocket.OPEN){ window.chatSystem.ws.send(JSON.stringify({ type:'typing_indicator', sessionId:window.chatSystem.currentSessionId, isTyping:true, sender:'admin' })); } } clearTimeout(typingTimer); typingTimer=setTimeout(()=>{ isTyping=false; if(window.chatSystem.ws && window.chatSystem.ws.readyState===WebSocket.OPEN){ window.chatSystem.ws.send(JSON.stringify({ type:'typing_indicator', sessionId:window.chatSystem.currentSessionId, isTyping:false, sender:'admin' })); } },1000); }); }
+      });
+
+      // Admin Data Loaders
+      function escapeHtml(text){ const map={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#039;'}; return String(text||'').replace(/[&<>"']/g, m=>map[m]); }
+
+      window.loadContacts = async function(){
+        const tbody=document.getElementById('contactsTableBody'); const q=(document.getElementById('contactsSearch')?.value||'').toLowerCase();
+        try{
+          let contacts=[]; try{ const r=await fetch('/api/contacts',{credentials:'include'}); const d=await r.json(); contacts=Array.isArray(d)?d:(d.contacts||[]); }catch(_){ contacts=[ {id:1,name:'Alice',email:'alice@example.com',phone:'123-456',service:'seo',message:'Need SEO',status:'new',created_at:new Date().toISOString()}, {id:2,name:'Bob',email:'bob@example.com',phone:'987-654',service:'funnels',message:'Funnel help',status:'contacted',created_at:new Date(Date.now()-86400000).toISOString()} ]; }
+          const filtered=contacts.filter(c=>!q||String(c.name||'').toLowerCase().includes(q)||String(c.email||'').toLowerCase().includes(q));
+          if(!filtered.length){ tbody.innerHTML='<tr><td colspan="8" style="padding:1rem 1.5rem;">No contacts found</td></tr>'; return; }
+          tbody.innerHTML=filtered.map(c=>{ const sts=String(c.status||'new'); const created=c.created_at?new Date(c.created_at).toLocaleString():'-'; return `<tr><td>${escapeHtml(c.name||'')}</td><td>${escapeHtml(c.email||'')}</td><td>${escapeHtml(c.phone||'')}</td><td>${escapeHtml(c.service||'')}</td><td style="max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${escapeHtml(c.message||'')}">${escapeHtml(c.message||'')}</td><td><select onchange="window.updateContactStatus('${c.id}', this.value)" style="padding:.35rem; border:1px solid var(--border-color); border-radius:6px;">${['new','contacted','converted','closed'].map(s=>`<option value="${s}" ${s===sts?'selected':''}>${s}</option>`).join('')}</select></td><td>${created}</td><td><button class="btn-small" style="background:#fee2e2;color:#991b1b;" onclick="window.deleteContact('${c.id}')"><i class="fas fa-trash"></i></button></td></tr>`; }).join('');
+        }catch(_){ tbody.innerHTML='<tr><td colspan="8" style="padding:1rem 1.5rem;color:#dc2626;">Failed to load contacts</td></tr>'; }
+      }
+      window.updateContactStatus = async function(id,status){ try{ const r=await fetch(`/api/contacts/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({status})}); if(!r.ok) throw new Error(); showAlert('Contact updated','success'); }catch(_){ showAlert('Failed to update contact','error'); } }
+      window.deleteContact = async function(id){ if(!confirm('Delete this contact?')) return; try{ const r=await fetch(`/api/contacts/${id}`,{method:'DELETE',credentials:'include'}); if(!r.ok) throw new Error(); showAlert('Contact deleted','success'); window.loadContacts(); }catch(_){ showAlert('Failed to delete contact','error'); } }
+
+      window.loadUsers = async function(){
+        const tbody=document.getElementById('usersTableBody'); const q=(document.getElementById('usersSearch')?.value||'').toLowerCase();
+        try{
+          let users=[]; try{ const r=await fetch('/api/users',{credentials:'include'}); const d=await r.json(); users=Array.isArray(d)?d:(d.users||[]); }catch(_){ users=[ {id:1,name:'Admin User',email:'admin@example.com',role:'admin',status:'active',created_at:new Date().toISOString()}, {id:2,name:'John Doe',email:'john@example.com',role:'user',status:'disabled',created_at:new Date(Date.now()-86400000*3).toISOString()} ]; }
+          const filtered=users.filter(u=>!q||String(u.name||'').toLowerCase().includes(q)||String(u.email||'').toLowerCase().includes(q));
+          if(!filtered.length){ tbody.innerHTML='<tr><td colspan="6" style="padding:1rem 1.5rem;">No users found</td></tr>'; return; }
+          tbody.innerHTML=filtered.map(u=>`<tr><td>${escapeHtml(u.name||'')}</td><td>${escapeHtml(u.email||'')}</td><td><span class="status-badge ${u.role==='admin'?'status-contacted':'status-active'}">${escapeHtml(u.role||'user')}</span></td><td><span class="status-badge ${u.status==='active'?'status-active':'status-closed'}">${escapeHtml(u.status||'disabled')}</span></td><td>${u.created_at?new Date(u.created_at).toLocaleString():'-'}</td><td><button class="btn-small" onclick="window.openEditUserModal('${u.id}','${encodeURIComponent(u.name||'')}','${encodeURIComponent(u.email||'')}','${u.role||'user'}','${u.status||'active'}')"><i class="fas fa-edit"></i></button> <button class="btn-small" style="background:#fee2e2;color:#991b1b;" onclick="window.deleteUser('${u.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+        }catch(_){ tbody.innerHTML='<tr><td colspan="6" style="padding:1rem 1.5rem;color:#dc2626;">Failed to load users</td></tr>'; }
+      }
+      window.openAddUserModal = function(){ document.getElementById('userModalTitle').textContent='Add User'; document.getElementById('userId').value=''; document.getElementById('userNameInput').value=''; document.getElementById('userEmailInput').value=''; document.getElementById('userPasswordInput').value=''; document.getElementById('passwordHint').textContent='(required for new user)'; document.getElementById('userRoleInput').value='user'; document.getElementById('userStatusInput').value='active'; document.getElementById('userModal').style.display='flex'; }
+      window.openEditUserModal = function(id,name,email,role,status){ document.getElementById('userModalTitle').textContent='Edit User'; document.getElementById('userId').value=id; document.getElementById('userNameInput').value=decodeURIComponent(name||''); document.getElementById('userEmailInput').value=decodeURIComponent(email||''); document.getElementById('userPasswordInput').value=''; document.getElementById('passwordHint').textContent='(leave blank to keep current password)'; document.getElementById('userRoleInput').value=role||'user'; document.getElementById('userStatusInput').value=status||'active'; document.getElementById('userModal').style.display='flex'; }
+      window.closeUserModal=function(){ document.getElementById('userModal').style.display='none'; }
+      window.saveUser = async function(e){ e.preventDefault(); const id=document.getElementById('userId').value; const name=document.getElementById('userNameInput').value.trim(); const email=document.getElementById('userEmailInput').value.trim(); const role=document.getElementById('userRoleInput').value; const status=document.getElementById('userStatusInput').value; const password=document.getElementById('userPasswordInput').value; try{ let r; if(id){ const body={name,email,role,status}; if(password) body.password=password; r=await fetch(`/api/users/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(body)}); } else { r=await fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({name,email,role,status,password})}); } if(!r.ok) throw new Error('Save failed'); showAlert('User saved','success'); window.closeUserModal(); window.loadUsers(); }catch(_){ showAlert('Failed to save user','error'); } }
+      window.deleteUser = async function(id){ if(!confirm('Delete this user?')) return; try{ const r=await fetch(`/api/users/${id}`,{method:'DELETE',credentials:'include'}); if(!r.ok) throw new Error('Delete failed'); showAlert('User deleted','success'); window.loadUsers(); }catch(_){ showAlert('Failed to delete user','error'); } }
+
+      // Analytics
+      let _chart;
+      window.loadAnalytics = async function(){
+        try{
+          let overview=null, series=null;
+          try{ const r1=await fetch('/api/analytics/overview',{credentials:'include'}); overview=await r1.json(); const r2=await fetch('/api/analytics/timeseries',{credentials:'include'}); series=await r2.json(); }
+          catch(_){ const days=[...Array(7)].map((_,i)=>new Date(Date.now()-(6-i)*86400000)); overview={bookings7d:12,messages7d:58,users7d:7,conversion:21}; series={labels:days.map(d=>d.toLocaleDateString()), bookings:days.map(()=>rand(1,5)), messages:days.map(()=>rand(5,15))}; }
+          document.getElementById('kpiBookings').textContent=(overview.bookings7d||0).toLocaleString();
+          document.getElementById('kpiMessages').textContent=(overview.messages7d||0).toLocaleString();
+          document.getElementById('kpiUsers').textContent=(overview.users7d||0).toLocaleString();
+          document.getElementById('kpiConversion').textContent=((overview.conversion||0))+'%';
+          if(window.Chart && document.getElementById('analyticsChart')){
+            const ctx=document.getElementById('analyticsChart').getContext('2d'); if(_chart) _chart.destroy();
+            _chart=new Chart(ctx,{ type:'line', data:{ labels:(series.labels||[]), datasets:[ {label:'Bookings', data:series.bookings||[], borderColor:'#FFD700', backgroundColor:'rgba(255,215,0,.2)', tension:.25}, {label:'Messages', data:series.messages||[], borderColor:'#1f2937', backgroundColor:'rgba(31,41,55,.15)', tension:.25} ] }, options:{ responsive:true, scales:{ y:{ beginAtZero:true } } } });
+          }
+        }catch(_){ showAlert('Failed to load analytics','error'); }
+      }
+      function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+      // Settings
+      window.loadSettings = async function(){ try{ let s; try{ const r=await fetch('/api/settings',{credentials:'include'}); s=await r.json(); }catch(_){ s={siteName:'JYS Media Admin',primaryColor:'#FFD700',autoRefresh:'on',retentionDays:30}; } document.getElementById('setSiteName').value=s.siteName||'JYS Media Admin'; document.getElementById('setPrimaryColor').value=s.primaryColor||'#FFD700'; document.getElementById('setAutoRefresh').value=(s.autoRefresh||'on'); document.getElementById('setRetention').value=s.retentionDays||30; }catch(_){ showAlert('Failed to load settings','error'); } }
+      window.saveSettings = async function(e){ e.preventDefault(); const payload={ siteName:document.getElementById('setSiteName').value.trim(), primaryColor:document.getElementById('setPrimaryColor').value, autoRefresh:document.getElementById('setAutoRefresh').value, retentionDays:parseInt(document.getElementById('setRetention').value,10) }; try{ const r=await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(payload)}); if(!r.ok) throw new Error('Save failed'); showAlert('Settings saved','success'); }catch(_){ showAlert('Failed to save settings','error'); } }
+
+      // Dashboard loader (hook point)
+      window.loadDashboard = function(){};
+
+      // Search hooks
+      document.addEventListener('input', (e)=>{ if(e.target && e.target.id==='contactsSearch') window.loadContacts(); if(e.target && e.target.id==='usersSearch') window.loadUsers(); });
+
+      // Initialize notification system
+      window.addEventListener('DOMContentLoaded', function() {
+          window.chatSystem.init();
+          window.chatSystem.setupQuickResponses();
+          window.chatSystem.startAutoRefresh();
+          
+          // Clear notifications when opening inbox
+          document.querySelector('[data-section="inbox"]').addEventListener('click', function() {
+              if (window.chatSystem && window.chatSystem.clearNotifications) {
+                  window.chatSystem.clearNotifications();
+              }
+          });
+
+          // Test the notification system
+        window.testNotification = function() {
+            console.log('Testing notification...');
+            if (window.chatSystem && window.chatSystem.showNewMessageNotification) {
+                window.chatSystem.showNewMessageNotification();
+            } else {
+                console.error('chatSystem or showNewMessageNotification not found');
+            }
+        };
+
+          // Request notification permission
+          if ('Notification' in window && Notification.permission === 'default') {
+              Notification.requestPermission();
+          }
+          
+          // Add test button for debugging
+          const testBtn = document.createElement('button');
+          testBtn.textContent = 'Test Toast';
+          testBtn.style.cssText = 'position:fixed;top:10px;left:10px;z-index:9999;padding:10px;background:gold;color:black;border:none;border-radius:5px;cursor:pointer;';
+          testBtn.onclick = window.testNotification;
+          document.body.appendChild(testBtn);
+      });
+    </script>
+</body>
+</html>
